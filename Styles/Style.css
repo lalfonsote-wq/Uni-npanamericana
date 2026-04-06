@@ -1,0 +1,137 @@
+ * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: #2c3e50;
+            color: white;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Ocultamos el checkbox */
+        #menu-toggle {
+            display: none;
+        }
+
+        /* Botón hamburguesa */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 30px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+
+        /* Menú de navegación */
+        .menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .menu ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .menu ul li {
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            transition: background 0.3s;
+            border-radius: 5px;
+        }
+
+        .menu ul li:hover {
+            background-color: #34495e;
+        }
+
+        .redes {
+            background-color: #e67e22;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex; /* Mostrar hamburguesa en móvil */
+            }
+
+            .menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 70%;
+                max-width: 280px;
+                height: 100vh;
+                background-color: #2c3e50;
+                flex-direction: column;
+                justify-content: center;
+                transition: left 0.3s ease-in-out;
+                z-index: 1000;
+                box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+            }
+
+            .menu ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            /* Cuando el checkbox está marcado, el menú se abre */
+            #menu-toggle:checked ~ .menu {
+                left: 0;
+            }
+
+            /* Animación del botón hamburguesa a "X" */
+            #menu-toggle:checked ~ .hamburger span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            #menu-toggle:checked ~ .hamburger span:nth-child(2) {
+                opacity: 0;
+            }
+
+            #menu-toggle:checked ~ .hamburger span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+
+            /* Overlay para cerrar al hacer clic fuera */
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0,0,0,0.5);
+                z-index: 999;
+            }
+
+            #menu-toggle:checked ~ .overlay {
+                display: block;
+            }
+        }
