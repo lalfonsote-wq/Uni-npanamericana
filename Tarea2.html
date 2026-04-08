@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloque Sticky + Imagen Circular</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .m1 {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            left: 0;
+            display: inline-block;
+            border-radius: 0 0 8px 0;
+        }
+
+        .m2 {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 3px solid white;
+        }
+
+        .m2:hover {
+            transform: scale(1.1);
+        }
+
+        .m2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .m3 {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .m4 p {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="m1">
+    pgm
+    </div>
+
+    <div class="m3">
+        <div class="m4">
+            <p>La Primera Guerra Mundial fue un conflicto armado que ocurrió entre 1914 y 1918. En ella participaron muchas potencias mundiales, divididas en dos bandos: la entente y las Potencias Centrales. Esta guerra causó millones de muertes y grandes cambios políticos, económicos y sociales en Europa y el mundo.</p>
+            
+        </div>
+    </div>
+
+    <div class="m2">
+        <img src="Images/lui.jpg" alt="Imagen">
+    </div>
+</body>
+</html>
