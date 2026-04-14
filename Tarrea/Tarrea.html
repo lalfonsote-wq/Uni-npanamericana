@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control parental</title>
+<style>
+body{margin:0;background:#ffffff;padding-bottom:90px}
+
+.phone{min-height:100vh;background:#f7f7fb;padding:15px}
+
+.top{background:#2f4db6;color:#ffffff;border-radius:25px;padding:25px 15px;text-align:center;box-shadow:0 8px 20px rgba(47,77,182,.25)}
+
+.panel{margin-top:20px;background:#ffffff;border-radius:18px;padding:15px;display:flex;justify-content:space-around;text-align:center;color:#333333}
+
+.grid{margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:15px}
+
+.card{border-radius:20px;padding:18px;min-height:150px;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+
+.icon-box,.foot-icon{display:flex;align-items:center;justify-content:center}
+
+.icon-box{width:50px;height:50px;background:#ffffff;border-radius:50%;font-size:12px;color:#666666;box-shadow:0 2px 8px}
+img{width:24px;height:24px;object-fit:contain}
+.pink{background:#ffe6ea}.yellow{background:#fff1d8}.purple{background:#ecebff}.green{background:#dff8ec}
+h1{font-size:35px;margin:0} h3{font-size:18px;margin:10px 0} p{line-height:1.4}
+
+
+.footer{position:fixed;bottom:0;left:0;width:100%;background:#ffffff;padding:15px;display:flex;justify-content:space-around;border-top:1px solid #dddddd}
+
+.foot-icon{width:30px;height:30px;border-radius:8px;background:#dddddd;font-size:11px}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="top">
+    <h1>1 hrs 25 min</h1>
+    <p>Today's time limit</p>
+    <div class="panel">
+      <div><div class="icon-box"><img src="Imgs/Candado.png" alt=""></div>Lock phone</div>
+      <div><div class="icon-box"><img src="Imgs/Pausa.png" alt=""></div>Pause</div>
+      <div><div class="icon-box"><img src="Imgs/Relojo.jpg" alt=""></div>Add time</div>
+    </div>
+  </div>  <div class="grid">
+    <div class="card pink">
+      <div class="icon-box"><img src="Imgs/Advertencia.png" alt=""></div>
+      <h3>Block Apps & Sites</h3>
+      <p>4 Apps<br>2431 Websites</p>
+    </div>
+    <div class="card yellow">
+      <div class="icon-box"><img src="Imgs/Cuadros.png" alt=""></div>
+      <h3>App Limits</h3>
+      <p>12 Apps</p>
+    </div>
+    <div class="card purple">
+      <div class="icon-box"><img src="Imgs/Flecha.png" alt=""></div>
+      <h3>Location</h3>
+    </div>
+    <div class="card green">
+      <div class="icon-box"><img src="Imgs/Seguro.png" alt=""></div>
+      <h3>Protection</h3>
+    </div>
+  </div>
+</div>
+<div class="footer" >
+  <div class="foot-icon"><img src="Imgs/Casa.jpg" alt="" /></div>
+  <div class="foot-icon"><img src="Imgs/Canasto.png" alt="" /></div>
+  <div class="foot-icon"><img src="Imgs/Usuario.png" alt="" /></div>
+</div>
+</body>
+</html>
