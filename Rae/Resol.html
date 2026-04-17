@@ -1,21 +1,197 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Layout con imágenes</title>
+
   <style>
-   body{
-     background-color:#ccb3b3 ;
-   }
+    body{
+      margin:0;
+      font-family: Arial;
+      background-color:pink ;
+    }
+
+    .container{
+      width:300px;
+      margin:auto;
+      background-image: url("Img/Bolitas.png");
+      border-radius: 20px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding:10px;
+    }
+
+    .header{
+      background:#2f4aa0;
+      height:180px;
+      border-radius:20px;
+      position:relative;
+    }
+
+    .profile{
+      position:absolute;
+      top:20px;
+      left:20px;
+      width:260px;
+      height:50px;
+      background:white;
+      border-radius:10px;
+    }
+
+    .profile img{
+      width:100%;
+      height:100%;
+    }
+
+    .time{
+      text-align:center;
+      margin-top:20px;
+    }
+
+    .buttons{
+      display:flex;
+      justify-content:space-around;
+      background:white;
+      padding:10px;
+      border-radius:10px;
+      margin-top:10px;
+    }
+
+    .btn img{
+      width:60px;
+      height:60px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .card{
+      height:120px;
+      border-radius:15px;
+      position:relative;
+      background:#ddd;
+    }
+
+    .icon img{
+      width:40px;
+      height:40px;
+      position:absolute;
+      top:10px;
+      left:10px;
+    }
+
+    .footer{
+      display:flex;
+      justify-content:space-around;
+      margin-top:15px;
+    }
+
+    .nav img{
+      width:40px;
+      height:40px;
+    }
+    img{
+      max-width: 40px;
+      max-height: 40px;
+    }
   </style>
 </head>
 
 <body>
-  <div class="m1">
-hola
-  </div>
-</body>
 
+<div class="container">
+
+  <div class="header">
+
+    <div class="profile">
+
+      <img src="Img/Usuario.png" alt="perfil">
+      
+    </div>
+  </div>
+
+  <div class="time">
+    <h2>1 hrs 25 min</h2>
+    <p>Today's time limit</p>
+  </div>
+
+  <div class="buttons">
+    <div class="btn">
+      
+      <img src="Img/Candado.png" alt="candado">
+    </div>
+
+    <div class="btn">
+      <img src="Img/Pausa.png" alt="pausa">
+    </div>
+
+    <div class="btn">
+
+      <img src="Img/Reloj.png" alt="reloj">
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon">
+
+        <img src="Img/Advertencia.png" alt="alerta">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon">
+
+        <img src="Img/Cuadros.png" alt="apps">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon">
+
+        <img src="Img/Flecha.png" alt="ubicacion">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon">
+       <img src="Img/Seguro.png" alt="proteccion">
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+
+    <div class="nav">
+
+      <img src="Img/Casa.jpg" alt="home">
+    </div>
+
+    <div class="nav">
+     
+      <img src="Img/Cuadros.png" alt="features">
+    </div>
+
+    <div class="nav">
+
+      <img src="Img/Campana.png" alt="notificaciones">
+    </div>
+
+    <div class="nav">
+
+      <img src="Img/Usuario.png" alt="perfil">
+    </div>
+
+  </div>
+
+</div>
+
+</body>
 </html>
