@@ -39,21 +39,40 @@
   justify-content:space-between;
   margin-top:30px;
 }
-.CI img{
- max-width: 30px; 
- 
+.CI {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.CI img {
+  max-width: 30px;
 }
 .FT{
-  
+  margin-top:20px;
 }
 .down{
-  
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:20px;
+}
+.down button{
+  background:green;
+  color:white;
+  border:none;
+  padding:10px;
+  border-radius:10px;
 }
 .size{
   max-width:100px;
 }
 p{
   width:40px;
+}
+.size2{
+display: flex;  
+justify-content:space-between;
 }
 
  </style>
@@ -78,12 +97,33 @@ p{
      <div></div>
      Maldivas is a holiday destination and the ultimate
      <div class="CI">
-       <img src="Img/Corriendo.png" alt="corre"/>corre
-       <img src="Img/Caja.png" alt="caje"/> caje
-       <img src="Img/Autobus.png" alt="bus" /> bus 
-       <img src="Img/Meditando.png" alt="medi" />medi
+       <img src="Img/Corriendo.png" alt="corre"/>
+       <img src="Img/Caja.png" alt="caje"/> 
+       <img src="Img/Autobus.png" alt="bus" />  
+       <img src="Img/Meditando.png" alt="medi" />
      </div>
-     <div class="down"></div>
+     <div class="size2">
+      <div>corre</div>
+      <div>caje</div>
+      <div>bus</div>
+      <div>medi</div>
+     </div>
+     
+     <div class="FT">
+       <div class="size2">
+         <div>1 Bed room</div>
+         <div>2 Person</div>
+       </div>
+       <div class="size2">
+         <div>1 washroom</div>
+         <div>Food</div>
+       </div>
+     </div>
+
+     <div class="down">
+       <div>Total: $1200</div>
+       <button>Buy Now</button>
+     </div>
      
    </div>
  </div> 
