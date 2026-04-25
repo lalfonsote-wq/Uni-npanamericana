@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  background:white;
+}
+
+.c{
+  width:120px;
+  height:360px;
+  background:black;
+  border-radius:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  padding:10px;
+}
+
+.btn{
+  background:grey;
+  border-radius:10px;
+}
+
+.power{
+  width:15px;
+  height:15px;
+  border-radius:50%;
+}
+
+.s{width:25px;height:10px;}
+.m{width:35px;height:15px;}
+.l{width:70px;height:20px;}
+
+.pad{
+  width:50px;
+  height:50px;
+  position:relative;
+}
+
+.v{
+  width:15px;
+  height:50px;
+  position:absolute;
+  left:17px;
+  background:grey;
+  border-radius:10px;
+}
+
+.h{
+  width:50px;
+  height:15px;
+  position:absolute;
+  top:17px;
+  background:#555;
+  border-radius:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="c">
+  <div class="power"></div>
+
+  <div class="btn s"></div>
+  <div class="btn s"></div>
+
+  <div class="pad">
+    <div class="v"></div>
+    <div class="h"></div>
+  </div>
+
+  <div class="btn m"></div>
+  <div class="btn m"></div>
+  <div class="btn m"></div>
+  <div class="btn m"></div>
+
+  <div class="btn l"></div>
+  <div class="btn l"></div>
+</div>
+
+</body>
+</html>
