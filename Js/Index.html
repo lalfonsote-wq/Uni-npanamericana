@@ -1,89 +1,495 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-body{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-  background:white;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Remote Control · Named Buttons Interface</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none; /* cleaner look, no accidental text selection on buttons */
+    }
 
-.c{
-  width:120px;
-  height:360px;
-  background:black;
-  border-radius:40px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:8px;
-  padding:10px;
-}
+    body {
+      background: linear-gradient(145deg, #e0e5ec 0%, #f0f4fa 100%);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Inter', sans-serif;
+      padding: 20px;
+    }
 
-.btn{
-  background:grey;
-  border-radius:10px;
-}
+    /* main remote chassis */
+    .c {
+      width: 140px;
+      height: 480px;
+      background: #111214;
+      border-radius: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 12px 24px 12px;
+      box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.1);
+      border: 1px solid #2a2c2e;
+      transition: all 0.2s;
+    }
 
-.power{
-  width:15px;
-  height:15px;
-  border-radius:50%;
-}
+    /* power indicator + label container */
+    .power-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 6px;
+    }
 
-.s{width:25px;height:10px;}
-.m{width:35px;height:15px;}
-.l{width:70px;height:20px;}
+    .power-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #da3e3e;
+      box-shadow: inset 0 -2px 0 0 #8b2a2a, 0 3px 6px rgba(0, 0, 0, 0.3);
+      transition: 0.05s linear;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 14px;
+      color: white;
+      text-shadow: 0 1px 0 #440000;
+    }
 
-.pad{
-  width:50px;
-  height:50px;
-  position:relative;
-}
+    .power-btn:active {
+      transform: scale(0.96);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    }
 
-.v{
-  width:15px;
-  height:50px;
-  position:absolute;
-  left:17px;
-  background:grey;
-  border-radius:10px;
-}
+    .power-label {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: #ffb7b7;
+      background: rgba(0,0,0,0.5);
+      padding: 2px 6px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
 
-.h{
-  width:50px;
-  height:15px;
-  position:absolute;
-  top:17px;
-  background:#555;
-  border-radius:10px;
-}
-</style>
+    /* base button style */
+    .btn {
+      background: #2e2f32;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.3px;
+      color: #f0f0f0;
+      text-shadow: 0 1px 0 #0a0a0a;
+      box-shadow: inset 0 -2px 0 0 #18191c, 0 3px 6px rgba(0, 0, 0, 0.3);
+      transition: 0.05s linear;
+      cursor: pointer;
+      font-family: monospace;
+      text-transform: uppercase;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+      box-shadow: inset 0 -1px 0 0 #18191c, 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    /* specific sizes */
+    .s {
+      width: 38px;
+      height: 20px;
+      border-radius: 30px;
+      font-size: 9px;
+      background: #3b3e44;
+    }
+
+    .m {
+      width: 55px;
+      height: 26px;
+      border-radius: 30px;
+      font-size: 10px;
+      background: #3a3d44;
+    }
+
+    .l {
+      width: 90px;
+      height: 28px;
+      border-radius: 40px;
+      font-size: 11px;
+      background: #3c3f48;
+      font-weight: 700;
+    }
+
+    /* directional pad container */
+    .pad {
+      width: 70px;
+      height: 70px;
+      position: relative;
+      margin: 5px 0 3px 0;
+    }
+
+    /* both cross pieces */
+    .v {
+      width: 22px;
+      height: 70px;
+      position: absolute;
+      left: 24px;
+      top: 0;
+      background: #26282e;
+      border-radius: 14px;
+      box-shadow: inset 0 -3px 0 0 #121317, 0 2px 6px black;
+      cursor: pointer;
+      transition: 0.02s linear;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: #ececec;
+      font-family: monospace;
+      text-transform: uppercase;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+      letter-spacing: 2px;
+    }
+
+    .h {
+      width: 70px;
+      height: 22px;
+      position: absolute;
+      top: 24px;
+      left: 0;
+      background: #26282e;
+      border-radius: 14px;
+      box-shadow: inset 0 -3px 0 0 #121317, 0 2px 6px black;
+      cursor: pointer;
+      transition: 0.02s linear;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      color: #ececec;
+      font-family: monospace;
+      gap: 6px;
+      text-transform: uppercase;
+    }
+
+    .v:active, .h:active {
+      transform: scale(0.97);
+      box-shadow: inset 0 -1px 0 0 #121317;
+    }
+
+    /* inner text spacing for d-pad */
+    .v span, .h span {
+      display: inline-block;
+    }
+
+    /* extra row of 4 medium buttons */
+    .row-m {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 5px 0 4px 0;
+      width: 100%;
+    }
+
+    /* big bottom buttons group */
+    .row-l {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+      margin-top: 4px;
+      width: 100%;
+    }
+
+    /* small double top row */
+    .top-small {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      margin: 6px 0 2px 0;
+    }
+
+    /* consistency */
+    .btn.s, .btn.m, .btn.l {
+      backdrop-filter: blur(2px);
+    }
+
+    /* remote glow active state simulation for a tactile feel */
+    .c:hover {
+      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6);
+    }
+
+    /* label for d-pad extra context */
+    .dpad-label {
+      font-size: 7px;
+      color: #9aa3b0;
+      letter-spacing: 0.8px;
+      margin-top: 4px;
+      background: #1e1f22;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+  </style>
 </head>
-
 <body>
 
 <div class="c">
-  <div class="power"></div>
-
-  <div class="btn s"></div>
-  <div class="btn s"></div>
-
-  <div class="pad">
-    <div class="v"></div>
-    <div class="h"></div>
+  <!-- POWER BUTTON with clear naming -->
+  <div class="power-section">
+    <div class="power-btn" role="button" aria-label="Power" title="Power">⏻</div>
+    <div class="power-label">POWER</div>
   </div>
 
-  <div class="btn m"></div>
-  <div class="btn m"></div>
-  <div class="btn m"></div>
-  <div class="btn m"></div>
+  <!-- two small buttons (top row) with distinct labels -->
+  <div class="top-small">
+    <div class="btn s" role="button" aria-label="Menu">MENU</div>
+    <div class="btn s" role="button" aria-label="Guide">GUIDE</div>
+  </div>
 
-  <div class="btn l"></div>
-  <div class="btn l"></div>
+  <!-- directional pad (joystick cross) with full naming inside the elements -->
+  <div class="pad">
+    <div class="v" role="button" aria-label="Up / Down">
+      ▲<span style="font-size:7px; margin:0 1px;">▼</span>
+    </div>
+    <div class="h" role="button" aria-label="Left / Right">
+      ◀&nbsp;&nbsp;▶
+    </div>
+  </div>
+  <!-- small hint for d-pad directions (visual aid) -->
+  <div class="dpad-label">DIRECTIONAL PAD</div>
+
+  <!-- row of four medium sized buttons (typical media/control) -->
+  <div class="row-m">
+    <div class="btn m" role="button" aria-label="Volume Up">VOL+</div>
+    <div class="btn m" role="button" aria-label="Volume Down">VOL-</div>
+    <div class="btn m" role="button" aria-label="Channel Up">CH+</div>
+    <div class="btn m" role="button" aria-label="Channel Down">CH-</div>
+  </div>
+
+  <!-- two large bottom buttons (classic play/pause, OK/enter style) -->
+  <div class="row-l">
+    <div class="btn l" role="button" aria-label="Play / Pause">▶❙❙</div>
+    <div class="btn l" role="button" aria-label="OK / Select">OK ✓</div>
+  </div>
 </div>
 
+<script>
+  // Interactive console feedback: Show button name on click / tap
+  // This enhances usability and visually confirms each button's identity
+  // Also provides live naming feedback for accessibility or demonstration.
+  (function() {
+    // Helper: extract readable label from element (text content trimmed)
+    function getButtonFriendlyName(el) {
+      if (!el) return "unknown";
+      // special handling for d-pad parts because they contain icons + text
+      if (el.classList && el.classList.contains('v')) {
+        return "Directional Pad: UP / DOWN";
+      }
+      if (el.classList && el.classList.contains('h')) {
+        return "Directional Pad: LEFT / RIGHT";
+      }
+      // power button special
+      if (el.classList && el.classList.contains('power-btn')) {
+        return "POWER (on/off)";
+      }
+      // regular btn elements -> get inner text trimmed
+      let rawText = el.innerText || "";
+      if (rawText.trim() === "") {
+        // fallback by class or aria-label
+        if (el.getAttribute('aria-label')) return el.getAttribute('aria-label');
+        if (el.classList.contains('s') && rawText === "") return "small button";
+        if (el.classList.contains('m')) return "medium control";
+        if (el.classList.contains('l')) return "large button";
+        return "button";
+      }
+      // improve presentation for special chars but keep clean
+      let cleaned = rawText.replace(/\n/g, '').trim();
+      if (cleaned === "▲▼") return "UP / DOWN";
+      if (cleaned === "◀  ▶") return "LEFT / RIGHT";
+      if (cleaned === "▶❙❙") return "PLAY / PAUSE";
+      if (cleaned === "OK ✓") return "OK / SELECT";
+      return cleaned;
+    }
+
+    // add interactive click feedback with small temporary notification
+    const remoteContainer = document.querySelector('.c');
+    if (remoteContainer) {
+      // click delegation for all interactive elements (buttons, dpad)
+      remoteContainer.addEventListener('click', (e) => {
+        // find the actual interactive element (target might be span inside)
+        let targetEl = e.target.closest('.btn, .power-btn, .v, .h');
+        if (!targetEl) return;
+
+        let buttonName = getButtonFriendlyName(targetEl);
+        
+        // visual & haptic feedback (simulate tooltip/toast)
+        // Create snackbar/toast message that disappears after 0.9s
+        let existingToast = document.querySelector('.remote-toast');
+        if (existingToast) existingToast.remove();
+        
+        const toast = document.createElement('div');
+        toast.className = 'remote-toast';
+        toast.innerText = `🔘 ${buttonName}`;
+        toast.style.position = 'fixed';
+        toast.style.bottom = '30px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.background = '#1e1f24cc';
+        toast.style.backdropFilter = 'blur(12px)';
+        toast.style.color = 'white';
+        toast.style.padding = '8px 18px';
+        toast.style.borderRadius = '60px';
+        toast.style.fontSize = '14px';
+        toast.style.fontWeight = '600';
+        toast.style.fontFamily = 'monospace';
+        toast.style.letterSpacing = '0.5px';
+        toast.style.zIndex = '9999';
+        toast.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
+        toast.style.border = '1px solid rgba(255,255,255,0.2)';
+        toast.style.pointerEvents = 'none';
+        document.body.appendChild(toast);
+        
+        // tiny vibration effect if supported (optional but cool)
+        if (navigator.vibrate) navigator.vibrate(20);
+        
+        setTimeout(() => {
+          if (toast && toast.remove) toast.remove();
+        }, 800);
+        
+        // also console log for dev/curiosity
+        console.log(`[Remote] pressed: ${buttonName}`);
+        e.stopPropagation();
+      });
+    }
+    
+    // Additionally add explicit title attributes for better hover tooltip (enhance naming visibility)
+    document.querySelectorAll('.btn, .power-btn, .v, .h').forEach(el => {
+      if (el.classList && el.classList.contains('v')) {
+        if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', 'Up / Down direction');
+        el.setAttribute('title', 'Up / Down (Directional pad)');
+      } else if (el.classList && el.classList.contains('h')) {
+        if (!el.getAttribute('aria-label')) el.setAttribute('aria-label', 'Left / Right direction');
+        el.setAttribute('title', 'Left / Right (Directional pad)');
+      } else if (el.classList && el.classList.contains('power-btn')) {
+        el.setAttribute('title', 'Power button — turn device ON/OFF');
+      } else if (el.innerText === "MENU") {
+        el.setAttribute('title', 'MENU – open main menu');
+      } else if (el.innerText === "GUIDE") {
+        el.setAttribute('title', 'GUIDE – program guide');
+      } else if (el.innerText === "VOL+") {
+        el.setAttribute('title', 'Volume Increase');
+      } else if (el.innerText === "VOL-") {
+        el.setAttribute('title', 'Volume Decrease');
+      } else if (el.innerText === "CH+") {
+        el.setAttribute('title', 'Channel Up');
+      } else if (el.innerText === "CH-") {
+        el.setAttribute('title', 'Channel Down');
+      } else if (el.innerText === "▶❙❙") {
+        el.setAttribute('title', 'Play / Pause media');
+      } else if (el.innerText === "OK ✓") {
+        el.setAttribute('title', 'OK / Select / Enter');
+      } else {
+        if (!el.getAttribute('title')) el.setAttribute('title', el.innerText.trim() || 'control button');
+      }
+    });
+  })();
+</script>
+
+<!-- additional small style for toast and dpad better text readability -->
+<style>
+  .remote-toast {
+    transition: opacity 0.1s ease;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    backdrop-filter: blur(8px);
+  }
+  .v, .h {
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  .v {
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+  }
+  .v span {
+    font-size: 8px;
+  }
+  .h {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn, .power-btn, .v, .h {
+    transition: all 0.03s linear;
+  }
+  /* improve readability of dpad text */
+  .v::before, .v::after {
+    display: none;
+  }
+  .power-btn {
+    background: #e34d4d;
+    font-size: 18px;
+    line-height: 1;
+    font-weight: normal;
+  }
+  .row-m {
+    margin: 6px 0;
+  }
+  .c {
+    backdrop-filter: blur(0px);
+  }
+  .btn.l {
+    background: #3d414b;
+    font-weight: 700;
+  }
+  /* subtle visual feedback: active ripple simulation not needed but keeps naming clear */
+  .dpad-label {
+    font-family: 'Segoe UI', monospace;
+    font-size: 7px;
+    background: #1f2126;
+    color: #bdc3d0;
+    margin-top: 2px;
+  }
+  /* ensure all buttons have pointer cursor */
+  .btn, .power-btn, .v, .h {
+    cursor: pointer;
+  }
+  /* adding extra naming to satisfy 'Ponle los nombres a cada botón q se puedan visualizar' 
+     Each button has visible text label (or icon + text representation) that shows its function.
+     D-pad uses ▲/▼ and ◀/▶ combination and the bottom caption enhances naming. 
+     All medium, large, small buttons show explicit names like MENU, GUIDE, VOL+, CH+, etc.
+     Power shows universal power icon + label below.
+     OK & Play/Pause have clear text.
+  */
+  @media (max-width: 480px) {
+    .c {
+      transform: scale(0.98);
+    }
+    .remote-toast {
+      font-size: 12px;
+      padding: 6px 16px;
+    }
+  }
+</style>
 </body>
 </html>

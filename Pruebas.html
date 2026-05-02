@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personaje y Puertas por Nivel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .personaje {
+            background: rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .avatar {
+            font-size: 80px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .nivel {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 10px 0;
+        }
+        
+        button {
+            font-size: 24px;
+            padding: 15px 30px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+        }
+        
+        .btn-subir {
+            background: #4CAF50;
+            color: white;
+            box-shadow: 0 4px 15px rgba(76,175,80,0.3);
+        }
+        
+        .puertas {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+            gap: 20px;
+        }
+        
+        .puerta {
+            background: rgba(0,0,0,0.7);
+            border-radius: 15px;
+            padding: 20px;
+            flex: 1;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #ffd700;
+        }
+        
+        .puerta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        
+        .puerta.cerrada {
+            opacity: 0.7;
+        }
+        
+        .puerta.abierta {
+            background: rgba(76,175,80,0.3);
+            border-color: #4CAF50;
+        }
+        
+        .icono-puerta {
+            font-size: 60px;
+            display: block;
+        }
+        
+        .requisito {
+            font-size: 14px;
+            margin-top: 10px;
+            color: #ffd700;
+        }
+        
+        .mensaje {
+            margin-top: 30px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(0,0,0,0.5);
+            font-size: 18px;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            font-size: 18px;
+        }
+        
+        .xp-bar {
+            width: 100%;
+            height: 20px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .xp-fill {
+            height: 100%;
+            background: #ffd700;
+            transition: width 0.3s;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="personaje">
+            <div class="avatar">⚔️ 🛡️</div>
+            <h2>Guerrero Legendario</h2>
+            <div class="nivel">Nivel <span id="nivel">1</span></div>
+            <div class="xp-bar">
+                <div class="xp-fill" id="xpFill" style="width: 0%"></div>
+            </div>
+            <div class="stats">
+                <span>💪 Fuerza: <span id="fuerza">10</span></span>
+                <span>❤️ Vida: <span id="vida">100</span></span>
+                <span>✨ XP: <span id="xp">0</span>/100</span>
+            </div>
+            <button class="btn-subir" id="btnSubirNivel">⬆️ Subir de Nivel (+XP) ⬆️</button>
+        </div>
+        
+        <div class="puertas">
+            <div class="puerta cerrada" id="puerta20">
+                <span class="icono-puerta">🚪🔒</span>
+                <h3>Puerta del Héroe</h3>
+                <div class="requisito">🔑 Requiere Nivel 20</div>
+                <div id="estado20">Cerrada</div>
+            </div>
+            
+            <div class="puerta cerrada" id="puerta30">
+                <span class="icono-puerta">🚪🔒</span>
+                <h3>Puerta del Maestro</h3>
+                <div class="requisito">🔑 Requiere Nivel 30</div>
+                <div id="estado30">Cerrada</div>
+            </div>
+        </div>
+        
+        <div class="mensaje" id="mensaje">
+            💡 Haz click en "Subir de Nivel" para ganar experiencia y subir de nivel
+        </div>
+    </div>
+
+    <script>
+        // Variables del personaje
+        let nivel = 1;
+        let experiencia = 0;
+        let experienciaNecesaria = 100;
+        
+        // Estado de las puertas
+        let puerta20Abierta = false;
+        let puerta30Abierta = false;
+        
+        // Función para subir experiencia y nivel
+        function subirExperiencia() {
+            // Ganar entre 10-30 XP por click
+            let xpGanada = Math.floor(Math.random() * 21) + 10;
+            experiencia += xpGanada;
+            
+            // Verificar si sube de nivel
+            while (experiencia >= experienciaNecesaria) {
+                experiencia -= experienciaNecesaria;
+                nivel++;
+                
+                // Mostrar mensaje de subida de nivel
+                mostrarMensaje(`🎉 ¡FELICIDADES! Has subido al Nivel ${nivel} 🎉`, "#ffd700");
+                
+                // Aumentar estadísticas
+                actualizarEstadisticas();
+                
+                // Verificar puertas automáticamente al subir nivel
+                verificarPuertas();
+            }
+            
+            // Actualizar interfaz
+            actualizarInterfaz();
+            
+            // Mensaje de XP ganada
+            mostrarMensaje(`✨ +${xpGanada} XP ✨`, "#4CAF50");
+        }
+        
+        // Actualizar estadísticas del personaje
+        function actualizarEstadisticas() {
+            let fuerza = 10 + (nivel - 1) * 5;
+            let vida = 100 + (nivel - 1) * 20;
+            
+            document.getElementById("fuerza").textContent = fuerza;
+            document.getElementById("vida").textContent = vida;
+        }
+        
+        // Función para intentar abrir puerta
+        function intentarAbrirPuerta(puertaNivel) {
+            if (puertaNivel === 20) {
+                if (puerta20Abierta) {
+                    mostrarMensaje("🚪 La Puerta del Héroe ya está abierta", "#ffd700");
+                    return;
+                }
+                
+                if (nivel >= 20) {
+                    puerta20Abierta = true;
+                    document.getElementById("puerta20").classList.remove("cerrada");
+                    document.getElementById("puerta20").classList.add("abierta");
+                    document.getElementById("estado20").textContent = "✅ Abierta";
+                    document.querySelector("#puerta20 .icono-puerta").innerHTML = "🚪🔓";
+                    mostrarMensaje("🏆 ¡Has abierto la Puerta del Héroe! Entras a la sala de los campeones 🏆", "#4CAF50");
+                } else {
+                    let nivelesFaltantes = 20 - nivel;
+                    mostrarMensaje(`❌ Necesitas nivel 20 para abrir esta puerta. Te faltan ${nivelesFaltantes} niveles ❌`, "#f44336");
+                }
+            } 
+            else if (puertaNivel === 30) {
+                if (puerta30Abierta) {
+                    mostrarMensaje("🚪 La Puerta del Maestro ya está abierta", "#ffd700");
+                    return;
+                }
+                
+                if (nivel >= 30) {
+                    puerta30Abierta = true;
+                    document.getElementById("puerta30").classList.remove("cerrada");
+                    document.getElementById("puerta30").classList.add("abierta");
+                    document.getElementById("estado30").textContent = "✅ Abierta";
+                    document.querySelector("#puerta30 .icono-puerta").innerHTML = "🚪🔓";
+                    mostrarMensaje("👑 ¡HAS ALCANZADO LA GLORIA! Entras a la cámara del maestro legendario 👑", "#ffd700");
+                } else {
+                    let nivelesFaltantes = 30 - nivel;
+                    mostrarMensaje(`❌ Necesitas nivel 30 para abrir esta puerta. Te faltan ${nivelesFaltantes} niveles ❌`, "#f44336");
+                }
+            }
+        }
+        
+        // Verificar puertas automáticamente (para cuando se sube de nivel)
+        function verificarPuertas() {
+            if (!puerta20Abierta && nivel >= 20) {
+                puerta20Abierta = true;
+                document.getElementById("puerta20").classList.remove("cerrada");
+                document.getElementById("puerta20").classList.add("abierta");
+                document.getElementById("estado20").textContent = "✅ Abierta";
+                document.querySelector("#puerta20 .icono-puerta").innerHTML = "🚪🔓";
+                mostrarMensaje("🏆 ¡La Puerta del Héroe se ha desbloqueado automáticamente! 🏆", "#4CAF50");
+            }
+            
+            if (!puerta30Abierta && nivel >= 30) {
+                puerta30Abierta = true;
+                document.getElementById("puerta30").classList.remove("cerrada");
+                document.getElementById("puerta30").classList.add("abierta");
+                document.getElementById("estado30").textContent = "✅ Abierta";
+                document.querySelector("#puerta30 .icono-puerta").innerHTML = "🚪🔓";
+                mostrarMensaje("👑 ¡La Puerta del Maestro se ha desbloqueado automáticamente! 👑", "#ffd700");
+            }
+        }
+        
+        // Actualizar toda la interfaz
+        function actualizarInterfaz() {
+            document.getElementById("nivel").textContent = nivel;
+            document.getElementById("xp").textContent = experiencia;
+            
+            let porcentajeXP = (experiencia / experienciaNecesaria) * 100;
+            document.getElementById("xpFill").style.width = porcentajeXP + "%";
+        }
+        
+        // Mostrar mensajes
+        function mostrarMensaje(texto, color = "white") {
+            const mensajeDiv = document.getElementById("mensaje");
+            mensajeDiv.innerHTML = texto;
+            mensajeDiv.style.color = color;
+            
+            // Limpiar mensaje después de 3 segundos
+            setTimeout(() => {
+                if (mensajeDiv.innerHTML === texto) {
+                    mensajeDiv.innerHTML = "💡 Haz click en 'Subir de Nivel' para ganar experiencia y subir de nivel";
+                    mensajeDiv.style.color = "white";
+                }
+            }, 3000);
+        }
+        
+        // Evento para subir de nivel (click)
+        document.getElementById("btnSubirNivel").addEventListener("click", subirExperiencia);
+        
+        // Eventos para las puertas
+        document.getElementById("puerta20").addEventListener("click", () => intentarAbrirPuerta(20));
+        document.getElementById("puerta30").addEventListener("click", () => intentarAbrirPuerta(30));
+        
+        // Inicializar
+        actualizarInterfaz();
+        actualizarEstadisticas();
+    </script>
+</body>
+</html>

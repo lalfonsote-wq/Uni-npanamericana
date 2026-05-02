@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <input type="number" id="edad">
+    
+  </input>
+  <button id="btn">
+    verificar edad
+  </button>
+  <h2 id="resultado">
+    
+    
+  </h2>
+  <script>
+    
+     document.getElementById("btn").onclick=function(){
+       let edad=document.getElementById("edad").value;
+     
+       if(edad <=18 ){
+        document.getElementById("resultado").innerHTML="menor de 18";
+        document.body.style.background = "red";
+       }
+       else{
+         document.getElementById("resultado").innerHTML="mayor entre";
+         document.body.style.background = "purple";
+       }
+     };
+  </script>
+</body>
+
+</html>

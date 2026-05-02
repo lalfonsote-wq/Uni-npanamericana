@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+    }
+
+    .juego {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .panel {
+      background: darkgrey;
+      padding: 25px;
+      border-radius: 16px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      background: grey;
+      color: white;
+      cursor: pointer;
+    }
+
+    .resultado {
+      margin-top: 25px;
+      padding: 25px;
+      border-radius: 16px;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .aplastante { background: orange; }
+    .victoria { background: blueviolet; }
+    .empate { background: blue; color: black; }
+    .derrota { background: #6c757d; }
+  </style>
+</head>
+
+<body>
+  <main class="juego">
+    <h1>Simulador de Batalla</h1>
+
+    <section class="panel">
+      
+      <label>Lanceros</label>
+      <input type="number" id="lanceros">
+
+      <label>Ballesteros</label>
+      <input type="number" id="ballesteros">
+
+      <label>Cañoneros</label>
+      <input type="number" id="canoneros">
+
+      <label>Poder del enemigo</label>
+      <input type="number" id="poderEnemigo">
+
+      <label>Moral</label>
+      <input type="number" id="moral">
+
+      <label>Moral del enemigo</label>
+      <input type="number" id="moralEnemigo">
+
+      <label>Defensa</label>
+      <input type="number" id="defensa">
+
+      <button onclick="iniciarBatalla()">Iniciar batalla</button>
+    </section>
+
+    <section id="resultado" class="resultado">
+      Esperando batalla
+    </section>
+
+    <script>
+      function iniciarBatalla() {
+        let lanceros = Number(document.getElementById("lanceros").value);
+        let ballesteros = Number(document.getElementById("ballesteros").value);
+        let canoneros = Number(document.getElementById("canoneros").value);
+        let poderEnemigo = Number(document.getElementById("poderEnemigo").value);
+        let moral = Number(document.getElementById("moral").value);
+        let moralEnemigo = Number(document.getElementById("moralEnemigo").value);
+        let defensa = Number(document.getElementById("defensa").value);
+
+        let resultado = document.getElementById("resultado");
+
+        resultado.className = "resultado";
+
+        let poderTotal = (lanceros * 3) + (ballesteros * 5) + (canoneros * 10) + moral + defensa;
+
+        if (moral < moralEnemigo) {
+          resultado.innerHTML = "a falta de moral tus tropas huyeron";
+          resultado.classList.add("derrota");
+          return;
+        }
+
+        if (moral > moralEnemigo) {
+          resultado.innerHTML = "a falta de moral el enemigo huyo";
+          resultado.classList.add("victoria");
+          return;
+        }
+
+        if (poderTotal >= poderEnemigo * 2) {
+          resultado.innerHTML = "Victoria aplastante";
+          resultado.classList.add("aplastante");
+        } else if (poderTotal > poderEnemigo) {
+          resultado.innerHTML = "Victoria";
+          resultado.classList.add("victoria");
+        } else if (poderTotal == poderEnemigo) {
+          resultado.innerHTML = "Empate";
+          resultado.classList.add("empate");
+        } else {
+          resultado.innerHTML = "Derrota";
+          resultado.classList.add("derrota");
+        }
+      }
+    </script>
+  </main>
+</body>
+
+</html>

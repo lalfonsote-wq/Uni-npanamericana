@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <input type="number" id="edad">
+  <button id="btn">verificar edad</button>
+
+  <h2 id="resultado"></h2>
+
+  <script>
+
+  document.getElementById("btn").onclick = function () {
+    let edad = document.getElementById("edad").value;
+
+    if (edad == 6) {
+      resultado.innerHTML = "tu ta en 1ro menor";
+      document.body.style.background = "pink";
+    }
+
+    if (edad == 7) {
+      resultado.innerHTML = "tu ta en 2do menor";
+      document.body.style.background = "orange";
+    }
+
+    if (edad == 8) {
+      resultado.innerHTML = "tu ta en 3ro menor";
+      document.body.style.background = "yellow";
+    }
+
+    if (edad == 9) {
+      resultado.innerHTML = "tu ta en 4to menor";
+      document.body.style.background = "green";
+    }
+
+    if (edad == 10) {
+      resultado.innerHTML = "tu ta en 5to menor";
+      document.body.style.background = "cyan";
+    }
+
+    if (edad == 11) {
+      resultado.innerHTML = "tu ta en 6to menor";
+      document.body.style.background = "blue";
+    }
+
+    if (edad == 12) {
+      resultado.innerHTML = "tu ta en 1ro secu";
+      document.body.style.background = "purple";
+    }
+
+    if (edad == 13) {
+      resultado.innerHTML = "tu ta en 2do secu";
+      document.body.style.background = "brown";
+    }
+
+    if (edad == 14) {
+      resultado.innerHTML = "tu ta en 3ro secu";
+      document.body.style.background = "gray";
+    }
+
+    if (edad == 15) {
+      resultado.innerHTML = "tu ta en 4to secu";
+      document.body.style.background = "lime";
+    }
+
+    if (edad == 16) {
+      resultado.innerHTML = "tu ta en 5to secu";
+      document.body.style.background = "magenta";
+    }
+
+    if (edad == 17) {
+      resultado.innerHTML = "tu ta en 6to secu";
+      document.body.style.background = "gold";
+    } 
+
+    if (edad >= 18) {
+      resultado.innerHTML = "tu ta en trabajo bro";
+      document.body.style.background = "skyblue";
+    } 
+
+    if (edad <= 5) {
+      resultado.innerHTML = "tu sabe leer?";
+      document.body.style.background = "white";
+    } 
+  }
+
+</script>
+</body>
+
+</html>

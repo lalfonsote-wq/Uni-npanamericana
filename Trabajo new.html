@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>clase</title>
+</head>
+
+<body>
+  <h1 id="titulo">Hola</h1>
+  <h1 id="titulo2">Texto original</h1>
+
+  <button id="boton">Cambiar fondo</button>
+  <button id="boton2">Mostrar alerta</button>
+  <button id="botin">Activar app</button>
+
+  <p id="mensaje"></p>
+
+  <script>
+    let nombre = "luis";
+    let edad = 15;
+    let lenguajeFavorito = "css";
+
+    let boton = document.getElementById("boton");
+    if (boton) {
+      boton.onclick = function() {
+        document.body.style.background = "purple";
+      };
+    }
+
+    document.getElementById("boton2").onclick = function() {
+      alert("hiciste click");
+    };
+
+    document.getElementById("botin").onclick = function() {
+      document.getElementById("titulo2").innerText = "App activada";
+      document.body.style.background = "#ffffff";
+
+      let hora = new Date().toLocaleTimeString();
+      document.getElementById("mensaje").innerText = "Hora actual: " + hora;
+    };
+  </script>
+</body>
+
+</html>
