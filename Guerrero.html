@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body
+  <script>
+    class Personaje {
+      constructor(nombre, vida, ataque, defensa) {
+        this.nombre = nombre;
+        this.vida = vida;
+        this.ataque = ataque;
+        this.defensa = defensa;
+      }
+      
+      atacar(objetivo) {
+        let dano = this.ataque - objetivo.defensa;
+        
+        if (dano < 0) {
+          dano = 0;
+        }
+        
+        objetivo.vida = objetivo.vida - dano;
+        
+        console.log(this.nombre + " atacó a " + objetivo.nombre);
+        console.log("Daño causado: " + dano);
+        console.log(objetivo.nombre + " tiene " + objetivo.vida + " de vida");
+      }
+    }
+    
+    let caballero = new Personaje("Caballero", 120, 30, 10);
+    let orco = new Personaje("Orco", 100, 25, 5);
+    let guerrero = new Personaje("Guerrero", 100, 58, 18);
+    let arquero = new Personaje("Arquero", 80, 35, 3);
+    let mago = new Personaje("Arquero", 55, 95, 1);
+    let dragon = new Personaje("Arquero", 172, 27, 53);
+    
+    caballero.atacar(orco);
+    orco.atacar(caballero);
+    guerrero.atacar(orco);
+    arquero.atacar(caballero);
+    mago.atacar(arquero);
+    dragon.atacar(guerrero)
+  </script>
+</body>
+
+</html>
