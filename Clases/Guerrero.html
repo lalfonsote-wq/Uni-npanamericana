@@ -26,20 +26,31 @@
       atacar(objetivo) {
         let dano = this.ataque - objetivo.defensa;
         
+        
+        
         if (dano < 0) {
           dano = 0;
         }
         
         objetivo.vida = objetivo.vida - dano;
-        
+        let muerto="";
+        if (objetivo.vida <=0)
+        {
+          
+         muerto= "esta muerto" 
+        }
+        else{
+          muerto=objetivo.vida
+        }
         resultado.innerHTML += "<p>" + this.nombre + " atacó a " + objetivo.nombre + "</p>";
         resultado.innerHTML += "<p>Daño causado: " + dano + "</p>";
-        resultado.innerHTML += "<p>" + objetivo.nombre + " tiene " + objetivo.vida + " de vida</p><hr>";
+        
+        resultado.innerHTML += "<p>" + objetivo.nombre + " tiene " + muerto +" de vida</p><hr>";
       }
     }
     
-    let caballero = new Personaje("Caballero", 120, 30, 10);
-    let orco = new Personaje("Orco", 100, 25, 5);
+    let caballero = new Personaje("Caballero", 120, 30, 30);
+    let orco = new Personaje("Orco", 100, 25, 15);
     let guerrero = new Personaje("Guerrero", 100, 58, 18);
     let arquero = new Personaje("Arquero", 80, 35, 3);
     let mago = new Personaje("Mago", 55, 95, 1);
