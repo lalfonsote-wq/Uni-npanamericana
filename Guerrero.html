@@ -4,11 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Pelea</title>
 </head>
 
-<body
+<body>
+  
+  <h1>Resultados de la batalla</h1>
+  <div id="resultado"></div>
+  
   <script>
+    let resultado = document.getElementById("resultado");
+    
     class Personaje {
       constructor(nombre, vida, ataque, defensa) {
         this.nombre = nombre;
@@ -26,9 +32,9 @@
         
         objetivo.vida = objetivo.vida - dano;
         
-        console.log(this.nombre + " atacó a " + objetivo.nombre);
-        console.log("Daño causado: " + dano);
-        console.log(objetivo.nombre + " tiene " + objetivo.vida + " de vida");
+        resultado.innerHTML += "<p>" + this.nombre + " atacó a " + objetivo.nombre + "</p>";
+        resultado.innerHTML += "<p>Daño causado: " + dano + "</p>";
+        resultado.innerHTML += "<p>" + objetivo.nombre + " tiene " + objetivo.vida + " de vida</p><hr>";
       }
     }
     
@@ -36,16 +42,17 @@
     let orco = new Personaje("Orco", 100, 25, 5);
     let guerrero = new Personaje("Guerrero", 100, 58, 18);
     let arquero = new Personaje("Arquero", 80, 35, 3);
-    let mago = new Personaje("Arquero", 55, 95, 1);
-    let dragon = new Personaje("Arquero", 172, 27, 53);
+    let mago = new Personaje("Mago", 55, 95, 1);
+    let dragon = new Personaje("Dragon", 172, 27, 53);
     
     caballero.atacar(orco);
     orco.atacar(caballero);
     guerrero.atacar(orco);
     arquero.atacar(caballero);
     mago.atacar(arquero);
-    dragon.atacar(guerrero)
+    dragon.atacar(guerrero);
   </script>
+  
 </body>
 
 </html>
