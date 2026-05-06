@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pelea</title>
+</head>
+
+<body>
+
+  <h1>Resultados de la batalla</h1>
+  <div id="resultado"></div>
+
+  <script>
+    let resultado = document.getElementById("resultado");
+
+    function mostrar(texto) {
+      resultado.innerHTML += texto + "<br>";
+    }
+
+    class Personaje {
+      constructor(nombre, vida, ataque, defensa, tipoAtaque) {
+        this.nombre = nombre;
+        this.vida = vida;
+        this.ataque = ataque;
+        this.defensa = defensa;
+        this.tipoAtaque = tipoAtaque;
+      }
+
+      atacar(objetivo) {
+        let daño = this.ataque - objetivo.defensa;
+
+        if (daño < 0) {
+          daño = 0;
+        }
+
+        objetivo.vida -= daño;
+
+        mostrar(this.nombre + " atacó con " + this.tipoAtaque);
+        mostrar(objetivo.nombre + " recibió " + daño + " de daño");
+        mostrar("Vida de " + objetivo.nombre + ": " + objetivo.vida);
+
+        if (objetivo.vida <= 0) {
+          mostrar(objetivo.nombre + " fue derrotado");
+        }
+      }
+
+      curar() {
+        this.vida += 20;
+
+        if (this.vida > 100) {
+          this.vida = 100;
+        }
+
+        mostrar(this.nombre + " se curó 20 puntos");
+        mostrar("Vida actual: " + this.vida);
+      }
+
+      defender() {
+        this.defensa += 10;
+
+        mostrar(this.nombre + " se defendió");
+        mostrar("Defensa actual: " + this.defensa);
+      }
+    }
+
+    let guerrero = new Personaje("Guerrero", 120, 30, 10, "espada");
+    let mago = new Personaje("Mago", 80, 40, 5, "magia");
+
+    guerrero.atacar(mago);
+    mago.curar();
+    mago.defender();
+    mago.atacar(guerrero);
+
+    let ninja = new Personaje("Ninja", 90, 35, 8, "katana");
+    let dragon = new Personaje("Dragón", 200, 50, 15, "fuego");
+    let sacerdote = new Personaje("Sacerdote", 100, 15, 6, "luz");
+
+    ninja.atacar(dragon);
+    dragon.atacar(ninja);
+    sacerdote.curar();
+    ninja.defender();
+  </script>
+
+</body>
+
+</html> 
