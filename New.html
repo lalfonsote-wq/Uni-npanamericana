@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <div id="resultado"></div>
+  <script>
+    let resultado= document.getElementById ("resultado")
+      let humano= {
+      brazo:2, 
+      pierna:2,
+      ojos:2,
+        
+      } 
+      resultado.innerHTML="el humano tiene"+ humano.brazo
+      
+      class LuisVargas{
+        constructor (nombre, edad, oficio){
+          this.nombre= nombre;
+          this.edad= edad;
+          this.oficio= oficio;
+        }
+     }
+        
+    const myLuis= new LuisVargas(
+    "luis vargas", 
+    "15", 
+    "Html", 
+   );
+   resultado.innerHTML= myLuis.nombre
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Juego</title>
+</head>
+
+<body>
+
+  <div id="resultado"></div>
+
+  <script>
+
+    let resultado = document.getElementById("resultado");
+
+    class Arma {
+      constructor(dano) {
+        this.dano = dano;
+      }
+    }
+
+    class Personaje {
+      constructor(salud, escudo, arma) {
+        this.salud = salud;
+        this.escudo = escudo;
+        this.arma = arma;
+      }
+    }
+
+    let escopetas = new Arma(160);
+    let bombitas = new Arma(220);
+    let diparin = new Arma(32);
+    let baston = new Arma(5);
+    let manquilla = new Arma(50);
+    let xon = new Arma(7);
+
+    let reaper = new Personaje(250, 20, escopetas);
+    let chipitero = new Personaje(150, 50, bombitas);
+    let diva = new Personaje(500, 100, diparin);
+    let monoqbrinca = new Personaje(400, 30, manquilla);
+    let curas = new Personaje(100, 40, baston);
+    let onda = new Personaje(50, 200, xon);
+
+    chipitero.salud = chipitero.salud - reaper.arma.dano;
+
+    reaper.salud = reaper.salud - diva.arma.dano;
+
+    diva.salud = diva.salud - monoqbrinca.arma.dano;
+
+    monoqbrinca.salud = monoqbrinca.salud - curas.arma.dano;
+
+    curas.salud = curas.salud - onda.arma.dano;
+
+    onda.salud = onda.salud - chipitero.arma.dano;
+
+    resultado.innerHTML =
+      "Chipitero: " + chipitero.salud + "<br>" +
+      "Reaper: " + reaper.salud + "<br>" +
+      "Diva: " + diva.salud + "<br>" +
+      "Monoqbrinca: " + monoqbrinca.salud + "<br>" +
+      "Curas: " + curas.salud + "<br>" +
+      "Onda: " + onda.salud;
+
+  </script>
+
+</body>
+
+</html>
