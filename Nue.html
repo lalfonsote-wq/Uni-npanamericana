@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini Juego de Estrategia JS</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #1e1e2f;
+      color: white;
+      padding: 20px;
+    }
+
+    .panel {
+      background: #2d2d44;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: auto;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      background: #4caf50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .soldado {
+      background: #3b3b59;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="panel">
+    <h1>⚔️ Creador de Ejército</h1>
+
+    <input id="nombre" placeholder="Nombre del soldado">
+
+    <select id="tipo">
+      <option value="Espadachín">Espadachín</option>
+      <option value="Arquero">Arquero</option>
+      <option value="Caballero">Caballero</option>
+      <option value="legendario">legendario</option>
+    </select>
+
+    <input id="ataque" type="number" placeholder="Ataque">
+    <input id="defensa" type="number" placeholder="Defensa">
+
+    <button onclick="crearSoldado()">Crear Soldado</button>
+    <button onclick="mostrarEjercito()">Mostrar Ejército</button>
+    <button onclick="atacar()">atacar</button>
+
+    <h2>Resultado:</h2>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+let ejercito = [];
+
+class Soldado {
+  constructor(nombre, tipo, ataque, defensa) {
+    this.nombre = nombre;
+    this.tipo = tipo;
+    this.ataque = ataque;
+    this.defensa = defensa;
+  }
+  
+  atacar() {
+    return `${this.nombre} el ${this.tipo} ataca con ${this.ataque} pts.`;
+  }
+  
+  obtenerPoder() {
+    return this.ataque + this.defensa;
+  }
+  
+  describir() {
+    return `${this.nombre} es un ${this.tipo}. Ataque: ${this.ataque}. Defensa: ${this.defensa}. Poder total: ${this.obtenerPoder()}.`;
+  }
+}
+
+function crearSoldado() {
+  let nombre = document.getElementById("nombre").value;
+  let tipo = document.getElementById("tipo").value;
+  let ataque = Number(document.getElementById("ataque").value);
+  let defensa = Number(document.getElementById("defensa").value);
+  
+  let nuevoSoldado = new Soldado(nombre, tipo, ataque, defensa);
+if (true) {
+  
+}  ejercito.push(nuevoSoldado);
+  
+  document.getElementById("resultado").innerHTML = `<p>✅ Soldado creado: ${nuevoSoldado.nombre}</p>`;
+}
+
+function mostrarEjercito() {
+  let html = "";
+  for (let i = 0; i < ejercito.length; i++) {
+    html += `<div class="soldado"><strong>${ejercito[i].nombre}</strong><br>Tipo: ${ejercito[i].tipo}<br>Ataque: ${ejercito[i].ataque}<br>Defensa: ${ejercito[i].defensa}<br>Poder: ${ejercito[i].obtenerPoder()}</div>`;
+  }
+  document.getElementById("resultado").innerHTML = html;
+}
+
+function calcularPoderTotal() {
+  let poderTotal = 0;
+  for (let i = 0; i < ejercito.length; i++) {
+    poderTotal += ejercito[i].obtenerPoder();
+  }
+  document.getElementById("resultado").innerHTML = `<h3>⚔️ Poder total del ejército: ${poderTotal}</h3>`;
+}
+
+// ✅ Función global atacar() - la que faltaba
+function atacar() {
+  if (ejercito.length === 0) {
+    document.getElementById("resultado").innerHTML = "<p>⚠️ No hay soldados para atacar.</p>";
+    return;
+  }
+  let mensaje = "⚔️ ¡El ejército ataca!<br><br>";
+  for (let i = 0; i < ejercito.length; i++) {
+    mensaje += ejercito[i].atacar() + "<br>";
+  }
+  document.getElementById("resultado").innerHTML = mensaje;
+} 
+  </script>
+
+</body>
+</html>

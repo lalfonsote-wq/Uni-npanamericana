@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <div id="soldados">
+    
+  </div>
+  <script>
+    let soldados = document.getElementById("soldados");
+    let piedra=0
+    function crearSoldados() {
+      while (piedra < 10) {
+  piedra++;
+  console.log("Recolectando piedra");
+  soldados.innerHTML+="Recolectando piedra"
+}
+    }
+    crearSoldados();
+  </script>
+</body>
+
+</html>

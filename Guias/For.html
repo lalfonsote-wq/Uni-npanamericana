@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <div id="soldados">
+    
+  </div>
+  <script>
+  let soldados=document.getElementById("soldados");
+    function crearSoldados() {
+  for (let i = 0; i <= 20; i++) {
+    console.log("Soldado creado: " + i);
+    soldados.innerHTML+="Soldado creado: " + i+ "<br>";
+  }
+}
+crearSoldados();
+
+  </script>
+</body>
+
+</html>

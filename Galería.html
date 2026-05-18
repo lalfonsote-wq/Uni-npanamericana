@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <h1>crear vehiculo</h1>
+  <h2>
+marca
+</h2>
+  <input id="marca">
+<h3>
+ millas
+</h3>
+  </input >
+    <input id="millas">
+
+  </input>
+  
+  <h4>colores</h4>
+    <select id="colores">
+      <option value="rojo">
+        rojo
+      </option>
+            <option value="verde">
+        verde
+      </option>
+            <option value="azul">
+        azul
+      </option>
+  </select>
+  <button onclick="crearCarro()">
+  crear carri
+</button>
+  
+  <div id="resultado"></div>
+  <div id="parqueo"></div>
+  <script>
+   let resultado=document.getElementById ("resultado")
+  let parqueo=document.getElementById ("parqueo")
+  class Cuestionario{
+    constructor(marca,colores,millas){
+      this.marca=marca;
+      this.colores=colores;
+      this.millas=millas;
+    }
+    
+  }
+  let garaje=[];
+  function crearCarro(){
+      let marca=document.getElementById ("marca").value;
+      let colores=document.getElementById ("colores").value;
+      let millas=document.getElementById ("millas").value;
+      let newcarro= new Cuestionario(marca,colores,millas);
+      
+      if(newcarro.millas<=100){
+        resultado.innerHTML="el vehículo que creaste fue un "+ newcarro.marca + " con "+newcarro.millas + " millas de color " + newcarro.colores + " ademas tu carro es nuevo "
+      }
+       if(newcarro.millas>=101){resultado.innerHTML="el vehículo que creaste fue un "+ newcarro.marca + " con "+newcarro.millas + " millas de color " + newcarro.colores + " ademas tu carro es viejo "}
+       if (newcarro.millas==0){
+      resultado.innerHTML="el vehículo que creaste fue un "+ newcarro.marca + " con "+newcarro.millas + " millas de color " + newcarro.colores + " ademas tu carro es nuevesito"
+    }
+    garaje.push (newcarro);
+    parqueo.innerHTML=garaje.length+ garaje[0].marca+ garaje[0].millas + garaje [0].colores
+    // Mostrar TODOS los carros del garaje usando while
+    let texto = "Carros en garaje: " + garaje.length + "<br><br>";
+    let i = 0;
+    while (i < garaje.length) {
+      texto = texto + "Carro " + (i + 1) + ": " + garaje[i].marca + " - " + garaje[i].colores + " - " + garaje[i].millas + " millas<br>";
+      i = i + 1;
+    }
+    parqueo.innerHTML = texto;
+    }
+     
+  </script>
+</body>
+
+</html>
