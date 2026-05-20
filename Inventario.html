@@ -4,48 +4,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title></title>
+  <title>Inventario</title>
 </head>
 
 <body>
+  <div id="demo"></div>
+  <div id="inventario"></div>
+
   <script>
-    let espada={
-      nombre:"Espada de hierro", 
-      tipo:"arma", 
-      poder:10, 
-      cantidad:1, 
+    let espada = {
+      nombre: "Espada de hierro",
+      tipo: "arma",
+      rareza:"comun", 
+      peso:"1.5lbs", 
+      poder: 10,
+      cantidad: 1,
+      oro:3, 
     };
-    let inventario=[];
+    let magico = {
+      nombre: "magia de hierro",
+      tipo: "magisco",
+      rareza:"magica", 
+      peso:"6lbs", 
+      poder: 11,
+      oro:2,
+      cantidad: 2,
+    };
+    let armadura = {
+      nombre: "armadura de hierro",
+      tipo: "arma dura", 
+      rareza:"poco comun",
+      peso:"30lbs", 
+      oro:4,
+      poder: 15,
+      cantidad: 1,} 
+    let inventario = [];
     inventario.push(espada);
-    
-    document.getElementById("demo").innerHTML="hola mundo";
-    for(let i=0; i<inventario.length;i++){
-      
-    }
-    if(item.tipo==="arma"){
-      
-    }
-    else{}
-    class item{
-      constructor(nombre, tipo, poder, cantidad){
-        this.nombre=nombre;
-        this.tipo=tipo;
-        this.poder=poder;
-        this.cantidad=cantidad;
+    let inventari = [];
+    inventario.push(magico);
+    let inventaro = [];
+    inventario.push(armadura);
+
+    document.getElementById("demo").innerHTML = "hola mundo";
+
+    for (let i = 0; i < inventario.length; i++) {
+      let item = inventario[i];
+      if (item.tipo === "arma") {
+      } else {
       }
-      let espada =new item(
-        "Espada", 
-        "arma", 
-        10,
-        1
-      );
-      inventario.push(espada);
     }
-    for(let i=0; i< inventario.length; i++){
-      let item=inventario[i];
-      document.getElementById ("inventario").innerHTML=html;
+
+    class item {
+      constructor(nombre, tipo, poder, cantidad) {
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.poder = poder;
+        this.cantidad = cantidad;
+      }
     }
+
+    let html = "";
+    for (let i = 0; i < inventario.length; i++) {
+      let item = inventario[i];
+      html += item.nombre + " - " + item.tipo + " <br> " + item.rareza+ "<br>" +item.peso+ "<br>";
+    }
+    document.getElementById("inventario").innerHTML = html;
   </script>
+  <button>comprar todo</button>
 </body>
 
 </html>
