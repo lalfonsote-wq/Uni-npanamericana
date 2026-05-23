@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>tienda</title>
+</head>
+<body>
+
+<h2>Tienda de Juegos</h2>
+<div class="tienda" id="contenedorJuegos">
+    <div class="juego" data-id="0">
+        <h3 class="titulo">Red Dead Redemption 2</h3>
+        <div class="precio">$59.99</div>
+        <div class="desc">Faroeste, historia y mundo abierto.</div>
+        <div class="badge"></div>
+    </div>
+    <div class="juego" data-id="1">
+        <h3 class="titulo">Cyberpunk 2077</h3>
+        <div class="precio">$49.99</div>
+        <div class="desc">Futurista, RPG y accion.</div>
+        <div class="badge"></div>
+    </div>
+    <div class="juego" data-id="2">
+        <h3 class="titulo">The Legend of Zelda</h3>
+        <div class="precio">$54.99</div>
+        <div class="desc">Aventura y puzzles.</div>
+        <div class="badge"></div>
+    </div>
+</div>
+
+<div class="panel">
+    <label>Selecciona un juego: </label>
+    <select id="selectJuego">
+        <option value="0">Red Dead Redemption 2</option>
+        <option value="1">Cyberpunk 2077</option>
+        <option value="2">The Legend of Zelda</option>
+    </select>
+    <br><br>
+    <button id="btnTitulo">1. Cambiar Titulo</button>
+    <button id="btnPrecio">2. Cambiar Precio</button>
+    <button id="btnDesc">3. Cambiar Descripcion</button>
+    <button id="btnFondo">4. Cambiar Color de fondo</button>
+    <button id="btnBadge">5. Activar/Quitar Destacado</button>
+</div>
+
+<script>
+    const juegos = document.querySelectorAll('.juego');
+    const select = document.getElementById('selectJuego');
+
+    function juegoSeleccionado() {
+        let id = parseInt(select.value);
+        return juegos[id];
+    }
+
+    document.getElementById('btnTitulo').onclick = function() {
+        let juego = juegoSeleccionado();
+        let nuevo = prompt('Nuevo titulo:', juego.querySelector('.titulo').innerText);
+        if (nuevo) juego.querySelector('.titulo').innerText = nuevo;
+    };
+
+    document.getElementById('btnPrecio').onclick = function() {
+        let juego = juegoSeleccionado();
+        let nuevoPrecio = prompt('Nuevo precio (ej: 39.99):', juego.querySelector('.precio').innerText.replace('$',''));
+        if (nuevoPrecio && !isNaN(nuevoPrecio)) {
+            juego.querySelector('.precio').innerText = '$' + parseFloat(nuevoPrecio).toFixed(2);
+        }
+    };
+
+    document.getElementById('btnDesc').onclick = function() {
+        let juego = juegoSeleccionado();
+        let nuevaDesc = prompt('Nueva descripcion:', juego.querySelector('.desc').innerText);
+        if (nuevaDesc) juego.querySelector('.desc').innerText = nuevaDesc;
+    };
+
+    document.getElementById('btnFondo').onclick = function() {
+        let juego = juegoSeleccionado();
+        let color = prompt('Color de fondo (ej: lightblue, #ffcc99, coral):', juego.style.backgroundColor || '#ffffff');
+        if (color) juego.style.backgroundColor = color;
+    };
+
+    document.getElementById('btnBadge').onclick = function() {
+        let juego = juegoSeleccionado();
+        let badgeDiv = juego.querySelector('.badge');
+        if (badgeDiv.innerHTML.includes('Destacado')) {
+            badgeDiv.innerHTML = '';
+        } else {
+            badgeDiv.innerHTML = '<span class="destacado">Destacado</span>';
+        }
+    };
+</script>
+
+</body>
+</html>

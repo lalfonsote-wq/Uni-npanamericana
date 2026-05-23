@@ -10,8 +10,10 @@
 <body>
   <div id="demo"></div>
   <div id="inventario"></div>
+  <di id="inventaro"></div>
 
   <script>
+  
     let espada = {
       nombre: "Espada de hierro",
       tipo: "arma",
@@ -19,7 +21,7 @@
       peso:"1.5lbs", 
       poder: 10,
       cantidad: 1,
-      oro:3, 
+      oro:3,
     };
     let magico = {
       nombre: "magia de hierro",
@@ -66,9 +68,11 @@
     let html = "";
     for (let i = 0; i < inventario.length; i++) {
       let item = inventario[i];
-      html += item.nombre + " - " + item.tipo + " <br> " + item.rareza+ "<br>" +item.peso+ "<br>";
+      html += item.nombre + " - " + item.tipo + " <br> " + item.rareza+ "<br>" +item.peso+ "<br>" ;
     }
     document.getElementById("inventario").innerHTML = html;
+    inventaro.innerHTML=inventario.length + "hols"
+    console.log(inventario.length)
   </script>
   <button>comprar todo</button>
 </body>
