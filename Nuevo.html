@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+   .photo{
+     background-image:url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7nh_2VcwTHR_qUwO1aeY8s3bX600_YCadlRm3JB6AOg&s=10");
+     
+     height:300px;
+     width:300px;
+     background-size:cover;
+   }
+  </style>
+</head>
+
+<body>
+ 
+  <div id="personajes">
+    <div class="personajecard">
+      <div class="nombre" id="nombredelpersonaje"></div>
+      <div class="photo" id="photod" style="url() "></div>
+      <div class="vida" id="vidad"></div>
+      
+    </div>
+  </div>
+  <script>
+  let nombredelpersonaje=document.getElementById("nombredelpersonaje");
+  let photod=document.getElementById("photod");
+  let vidad=document.getElementById ("vidad")
+    class MoldePersonaje{
+      constructor(nombre, imagen,vida){
+        this.nombre=nombre;
+        this.imagen=imagen;
+        this.vida=vida;
+      }
+    };
+    const mario= new MoldePersonaje("mario", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7nh_2VcwTHR_qUwO1aeY8s3bX600_YCadlRm3JB6AOg&s", 100);
+    nombredelpersonaje.innerHTML=mario.nombre; 
+    photod.style.backgroundImage=`url("${mario.imagen}")`;
+    photod.style.backgroundImage="url("+ mario.imagen+")"
+    vidad.innerHTML=` este personaje tiene ${mario.vida} de vid` ;
+  </script>
+</body>
+
+</html>

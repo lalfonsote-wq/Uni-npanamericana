@@ -332,8 +332,11 @@
   </footer>
 </div>
 
+
+<div id="resultado"></div>
+
 <script>
-  // ----- BASE DE DATOS DE INVENTARIO (juegos con sus atributos) -----
+let resultado=document.getElementById("resultado")  /
   const inventoryGames = [
     {
       id: 1,
@@ -464,6 +467,14 @@
     }
   ];
 
+class juego{
+  constructor(precio, cantidad){
+    this.precio = precio;    // CAMBIADO: coma por punto y coma
+    this.cantidad = cantidad; // CAMBIADO: coma por punto y coma
+  }
+}
+const galipon = new juego(40,1);
+
   // función para renderizar el grid (filtrado)
   function renderGames(filterText = "") {
     const container = document.getElementById("gamesGridContainer");
@@ -573,6 +584,7 @@
       });
     }
   });
+  resultado.innerHTML = "hola"+"adios"+"q tal";
 </script>
 </body>
 </html>
