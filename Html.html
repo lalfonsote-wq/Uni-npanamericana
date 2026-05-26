@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consumir JSON</title>
+</head>
+<body>
+  <h1>Datos del Usuario</h1>
+  <div id="contenido"></div>
+
+  <script>
+    // Consumir el archivo datos.json
+    fetch('datos.json')
+    
+      .then(response => {
+        // Verificar si la respuesta es exitosa
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+        return response.json(); // Convertir respuesta a JSON
+      })
+      
+      .then(datosuser => {
+        
+        // Aquí ya tenemos los datos del JSON
+        console.log('Datos cargados:', datosuser);
+        
+        // Mostrar los datos en HTML
+        const contenido = document.getElementById('contenido');
+        contenido.innerHTML = `
+          <p><strong>Usuario:</strong> ${datosuser.usuario}</p>
+          <p><strong>Contraseña:</strong> ${datosuser.contraseña}</p>
+          <p><strong>Trabajo:</strong> ${datosuser.trabajo ? 'Sí' : 'No'}</p>
+          <p><strong>Dinero:</strong> $${datosuser.dinero}</p>
+          <p><strong>Habilidades:</strong> ${datosuser.habilidades.join(', ')}</p>
+        `;
+        
+        // Acceder a propiedades individuales
+        console.log(datosuser.usuario);     // "luis"
+        console.log(datosuser.dinero);      // 3800
+        console.log(datosuser.habilidades[0]); // "inteligencia"
+      })
+      .catch(error => {
+        console.error('Error al cargar el JSON:', error);
+        document.getElementById('contenido').innerHTML = 
+          '<p style="color:red">Error al cargar los datos</p>';
+          
+      });
+      
+  </script>
+</body>
+</html>

@@ -47,6 +47,16 @@
     //anatomía de if y else 
     resultado.innerHTML=
     //forma base de como hacer que se visualice el js en pantalla
+    photod.style.backgroundImage=`url("${mario.imagen}")`;
+    fetch('datos.json')
+    
+      .then(response => {
+        // Verificar si la respuesta es exitosa
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
+        }
+        return response.json(); // Convertir respuesta a JSON
+      })
   </script>
 
 </body>

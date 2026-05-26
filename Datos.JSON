@@ -1,0 +1,9 @@
+{
+  "usuario":"luis Alfonso", 
+  "contraseña":"gro",
+  "trabajo":false, 
+  "dinero":3800, 
+  "habilidades":[
+    "inteligencia", "fuerte", "belleza"
+  ]
+}

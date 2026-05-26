@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <style>
+img {
+  height: 40px;
+  width: 120px;
+  border: 2px solid black;
+}
+  </style>
+  <button id="mostradorluigi"
+    onclick="mostrarluigi()">
+    mostrar luigi 
+  </button>
+  <button id="mostradormario" onclick="mostrarmario()">
+    mostrar mario
+  </button>
+  <button id="mostradorwario" onclick="mostrarwario()">
+  mostrar wario
+</button>
+<button id="mostradorwaluigi" onclick="mostrarwaluigi()">
+  mostrar waluigi
+</button>
+  <div id="galeria">
+    
+  </div>
+  <script>
+  let galeria=document.getElementById("galeria"); 
+  let mostradorluigi=document.getElementById("mostradorluigi");
+  let mmario=document.getElementById("mmario");
+class MoldePersonaje {
+  constructor(nombre, imagen, vida) {
+    this.nombre = nombre;
+    this.imagen = imagen;
+    this.vida = vida;
+  }
+};
+const mario = new MoldePersonaje("mario", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7nh_2VcwTHR_qUwO1aeY8s3bX600_YCadlRm3JB6AOg&s", 100);
+const luigi = new MoldePersonaje("luigi", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_Cv5x0LhIG8KZVLepZnM1HiVQv2DCMWtBe4dy2jWbK4kbKYjpewhYYSL5jKt2SmvzI36j1UTyVWsJm4t2-SnGNWtXNr9b8xY7xtN3Frc&s=10", 70);
+const wario= new MoldePersonaje("wario","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7gZTv6pmvmlK--nHL-7YzNg_ahGMubmbn2287HLiNJA&s=10",120 )
+    const waluigi= new MoldePersonaje("waluigi","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcapHbq8MTw3ybGgMb_bP3KGCxvvHkpjfzR3wmUvo3Yg&s=10",110 )
+  function mostrarluigi(){
+    galeria.innerHTML=`${luigi.nombre}
+    <img src="${luigi.imagen}" >
+      
+    </img>
+    `
+  };
+  function mostrarmario(){
+    galeria.innerHTML=`${mario.nombre}
+    <img src="${mario.imagen}" >
+      
+    </img>
+    `
+  };
+function mostrarwario() {
+  galeria.innerHTML = `${wario.nombre}
+    <img src="${wario.imagen}" >
+      
+    </img>
+    `
+};
+  function mostrarwaluigi() {
+  galeria.innerHTML = `${waluigi.nombre}
+    <img src="${waluigi.imagen}" >
+      
+    </img>
+    `
+};
+  </script>
+</body>
+
+</html>
