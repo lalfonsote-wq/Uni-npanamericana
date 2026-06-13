@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script >
+   async function blanco(){
+     let negro= await fetch ("https://jsonplaceholder.typicode.com/posts/1")
+     let azul= await negro.json()
+     console.log(azul)
+   }
+   blanco()
+  </script >
+</body>
+
+</html>

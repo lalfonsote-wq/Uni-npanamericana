@@ -1,4 +1,4 @@
-{
+[{
   "usuario":"luis Alfonso", 
   "contraseña":"gro",
   "trabajo":false, 
@@ -6,4 +6,14 @@
   "habilidades":[
     "inteligencia", "fuerte", "belleza"
   ]
-}
+},
+ {
+  "usuario":"luis vargas ", 
+  "contraseña":"holas",
+  "trabajo":true, 
+  "dinero":4800, 
+  "habilidades":[
+    "inteligencia", "fuerte", "belleza"
+   ] 
+ } 
+] 

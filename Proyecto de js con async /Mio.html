@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digidex</title>
+</head>
+<body>
+
+<h1>Digidex</h1>
+<p>Busca Digimon por nombre</p>
+
+<label>Nombre del Digimon:</label>
+<input type="text" id="pokemonNumero">
+<button onclick="buscarPokemon()">Buscar y agregar</button>
+
+<hr>
+
+<div id="pokemonGrid"></div>
+
+<script>
+async function buscarPokemon() {
+
+  const numero =
+    document.getElementById("pokemonNumero").value;
+
+  const respuesta =
+    await fetch(`https://digimon-api.vercel.app/api/digimon/name/${numero.toLowerCase()}`);
+
+  const dataArray = await respuesta.json();
+  
+  const data = dataArray[0];
+  
+  
+  
+  let pokemonGrid = document.getElementById("pokemonGrid");
+  
+  pokemonGrid.innerHTML += `        <div class="pokemon-card">
+
+  <img
+    src="${data.img}"
+    
+    
+  >
+
+  <h3>${data.name}</h3>
+  <p>Nivel: ${data.level}</p>
+
+</div>`;
+}
+</script>
+
+</body>
+</html>

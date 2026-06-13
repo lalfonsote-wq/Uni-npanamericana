@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+ <script>
+    async function roto(){
+      let data=await fetch ("Datos.JSON")
+      let objetos= await data.json() 
+      console.log(objetos.usuario)
+      
+    };
+    roto()
+ </script> 
+</body>
+
+</html>

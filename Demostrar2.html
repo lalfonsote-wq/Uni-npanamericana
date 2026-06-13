@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <div id="resultado"></div>
+  
+ <script>
+ let resultado= document.getElementById("resultado")
+    async function datos(){
+      let archivo= await fetch("Personajes.JSON")
+      let lista= await archivo.json()
+      console.log(lista)
+      resultado.innerHTML="<h1>"+ lista.nombre +"</h1>"+ lista.tipo + lista.vida+ `<h2> hola ${lista.vida}adios </h2>`
+      
+      }
+      
+    datos()
+ </script>
+</body>
+
+</html>

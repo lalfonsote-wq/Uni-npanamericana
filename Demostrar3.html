@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <div id="resultado"></div>
+  <script>
+    let resultado=document.getElementById("resultado")
+  async function presidente(){
+    let vicepresidente= await fetch("Datos.JSON")
+    let fiscal= await vicepresidente.json()
+    console.log(fiscal)
+    console.log(Array.isArray(fiscal))
+    
+    
+    resultado.innerHTML="<h1>"+ fiscal[0].usuario+fiscal[0].contraseña+"</h1>"+ `<h2>klk ${fiscal[1].usuario} </h2>`
+    fiscal.push({
+      usuario:"pepe", 
+      contraseña:"abc", 
+      
+    })
+    console.log(fiscal[2].usuario)
+  }
+  presidente()
+  </script >
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script >
+  //objeto manual
+    let personaje={
+      nombre:"naruto", 
+      tipo:"ninja", 
+      poder:100, 
+    }
+    console.log(personaje.nombre)
+    let personajeJson={
+      "nombre":"sasuke", 
+      "tipo":"ninja", 
+      "poder":"120", 
+    }
+    console.log(personajeJson.tipo)
+    async function cargarArchivoJSON(){
+      let respuesta= await fetch ("personajes.JSON");
+      let datos= await respuesta.json();
+      console.log(datos);
+    };
+    cargarArchivoJSON()
+    
+      </script >
+</body>
+
+</html>
