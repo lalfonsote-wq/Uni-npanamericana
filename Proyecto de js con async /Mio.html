@@ -11,21 +11,21 @@
 <p>Busca Digimon por nombre</p>
 
 <label>Nombre del Digimon:</label>
-<input type="text" id="pokemonNumero">
-<button onclick="buscarPokemon()">Buscar y agregar</button>
+<input type="text" id="digimonNombre">
+<button onclick="buscarDigimon()">Buscar y agregar</button>
 
 <hr>
 
-<div id="pokemonGrid"></div>
+<div id="digimonGrid"></div>
 
 <script>
-async function buscarPokemon() {
+async function buscarDigimon() {
 
-  const numero =
-    document.getElementById("pokemonNumero").value;
+  const nombre =
+    document.getElementById("digimonNombre").value;
 
   const respuesta =
-    await fetch(`https://digimon-api.vercel.app/api/digimon/name/${numero.toLowerCase()}`);
+    await fetch(`https://digimon-api.vercel.app/api/digimon/name/${nombre}`);
 
   const dataArray = await respuesta.json();
   
@@ -33,9 +33,9 @@ async function buscarPokemon() {
   
   
   
-  let pokemonGrid = document.getElementById("pokemonGrid");
+  let digimonGrid = document.getElementById("digimonGrid");
   
-  pokemonGrid.innerHTML += `        <div class="pokemon-card">
+  digimonGrid.innerHTML += `        <div class="digimon-card">
 
   <img
     src="${data.img}"

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script>
+    let inventario = [];
+    
+    const crearItem = (nombre, valor, tipo = "Desconocido") => {
+      return { nombre: nombre, valor: valor, tipo: tipo };
+    }
+    
+    function agregarItem(nombre, valor) {
+      let item = crearItem(nombre, valor);
+      inventario.push(item);
+      console.log(inventario);
+    }
+    
+    agregarItem("Espada", 500);
+    agregarItem("Escudo", 300);
+    agregarItem("Poción", 50);
+  </script>
+</body>
+
+</html>

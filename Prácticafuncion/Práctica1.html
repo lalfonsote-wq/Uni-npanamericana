@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script>
+    const iva = 0.18;
+    let total = 0;
+    
+    function agregarProducto(nombre, precio) {
+      function actualizarTotal() {
+        total += precio;
+      }
+      actualizarTotal();
+      console.log(nombre + "agregado Total:" + total);
+    }
+    
+    agregarProducto("Mouse", 25);
+    agregarProducto("Teclado", 50);
+    agregarProducto("Monitor", 200);
+    
+    console.log(total + (total *iva));
+  </script>
+</body>
+
+</html>

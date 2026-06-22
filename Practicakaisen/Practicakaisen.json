@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "nombre": "Yuji Itadori",
+    "foto": "https://cdn.myanimelist.net/images/characters/6/386735.jpg",
+    "grado": "Estudiante",
+    "energiaMaldita": 85,
+    "fuerza": 95,
+    "velocidad": 88,
+    "tecnica": 70,
+    "resistencia": 92
+  },
+  {
+    "id": 2,
+    "nombre": "Megumi Fushiguro",
+    "foto": "https://static.wikia.nocookie.net/dbxfanon/images/1/1d/Megumi.png",
+    "grado": "Hechicero Grado 2",
+    "energiaMaldita": 82,
+    "fuerza": 72,
+    "velocidad": 80,
+    "tecnica": 90,
+    "resistencia": 78
+  },
+  {
+    "id": 3,
+    "nombre": "Nobara Kugisaki",
+    "foto": "https://cdn.myanimelist.net/images/characters/15/422168.jpg",
+    "grado": "Estudiante",
+    "energiaMaldita": 78,
+    "fuerza": 70,
+    "velocidad": 76,
+    "tecnica": 84,
+    "resistencia": 75
+  },
+  {
+    "id": 4,
+    "nombre": "Satoru Gojo",
+    "foto": "https://cdn.myanimelist.net/images/characters/15/422168.jpg",
+    "grado": "Especial",
+    "energiaMaldita": 100,
+    "fuerza": 98,
+    "velocidad": 100,
+    "tecnica": 100,
+    "resistencia": 97
+  },
+  {
+    "id": 5,
+    "nombre": "Ryomen Sukuna",
+    "foto": "https://static.wikia.nocookie.net/jujutsu-kaisen/images/7/74/Sukuna_%28Volume_29%29.png",
+    "grado": "Rey de las Maldiciones",
+    "energiaMaldita": 100,
+    "fuerza": 100,
+    "velocidad": 98,
+    "tecnica": 100,
+    "resistencia": 100
+  },
+  {
+    "id": 6,
+    "nombre": "Maki Zenin",
+    "foto": "https://cdn.rafled.com/anime-icons/images/390b3bd080428904fb5ab72b2478a68f3960e77448e7727e0307b2ddff23a2ea.jpg",
+    "grado": "Estudiante",
+    "energiaMaldita": 20,
+    "fuerza": 96,
+    "velocidad": 90,
+    "tecnica": 88,
+    "resistencia": 94
+  }
+]

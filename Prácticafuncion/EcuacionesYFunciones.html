@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script>
+    const ecuaciones=(x, r)=>{
+      const sumar=()=>{
+        return x + r
+      }
+      console.log(sumar())
+      
+      
+      const restar=(o, p)=>{
+        return o-p
+      }
+      console.log(restar(x, r) + "resta")
+      
+    }
+    ecuaciones(45, 1)
+    const impuestos=0.18;
+    let total=0;
+    function agregarPrecio(x){
+      total+=x
+    }
+    console.log(total);
+    agregarPrecio(3)
+    console.log(total);
+    agregarPrecio(10)
+    console.log(total);
+    let totalImpuestos=total+(total*impuestos)
+    console.log(totalImpuestos)
+  </script>
+</body>
+
+</html>

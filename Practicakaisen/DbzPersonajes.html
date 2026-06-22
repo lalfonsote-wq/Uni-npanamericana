@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Dragon Ball Character Selector</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, #ffb703 0%, transparent 30%),
+        linear-gradient(180deg, #111827, #050505);
+      color: white;
+      padding: 16px;
+    }
+
+    .app {
+      max-width: 430px;
+      margin: 0 auto;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 26px;
+      color: #ffb703;
+      text-shadow: 0 0 12px rgba(255, 183, 3, 0.8);
+    }
+
+    .header p {
+      margin: 6px 0 0;
+      font-size: 14px;
+      color: #d1d5db;
+    }
+
+    .selector-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .character-card {
+      background: linear-gradient(180deg, #1f2937, #111827);
+      border: 2px solid #374151;
+      border-radius: 18px;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 8px 0 #000;
+    }
+
+    .character-card.selected {
+      border-color: #ffb703;
+      box-shadow:
+        0 0 18px rgba(255, 183, 3, 0.9),
+        0 8px 0 #000;
+      transform: translateY(-3px);
+    }
+
+    .character-card img {
+      width: 100%;
+      height: 95px;
+      object-fit: contain;
+      background: #020617;
+      border-radius: 14px;
+      padding: 6px;
+    }
+
+    .character-card h3 {
+      margin: 8px 0 0;
+      font-size: 13px;
+    }
+
+    .detail-panel {
+      background: linear-gradient(180deg, #1e293b, #020617);
+      border: 2px solid #ffb703;
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 0 0 25px rgba(255, 183, 3, 0.35);
+    }
+
+    .detail-top {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .detail-image {
+      width: 130px;
+      height: 160px;
+      object-fit: contain;
+      background: #020617;
+      border-radius: 18px;
+      padding: 8px;
+      border: 2px solid #334155;
+    }
+
+    .detail-info h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #ffb703;
+    }
+
+    .detail-info p {
+      margin: 6px 0;
+      font-size: 14px;
+      color: #e5e7eb;
+    }
+
+    .stats {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stat {
+      background: #111827;
+      padding: 10px;
+      border-radius: 14px;
+      border: 1px solid #374151;
+    }
+
+    .stat-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+    }
+
+    .bar {
+      width: 100%;
+      height: 12px;
+      background: #374151;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ffb703, #fb8500);
+      border-radius: 20px;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    button {
+      border: none;
+      padding: 12px;
+      border-radius: 14px;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+    }
+
+    .attack-btn {
+      background: #dc2626;
+    }
+
+    .special-btn {
+      background: #2563eb;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="app">
+
+    <header class="header">
+      <h1>Dragon Ball Arena</h1>
+      <p>Selecciona un personaje para ver sus detalles</p>
+    </header>
+
+    <!-- GRID DE SELECCIÓN -->
+    <section class="selector-grid" id="resultado">
+
+     
+
+
+    </section>
+
+    <!-- DETALLE DEL PERSONAJE SELECCIONADO -->
+    <section class="detail-panel" id="datos">
+
+      
+      <div class="actions">
+        <button class="attack-btn">Atacar</button>
+        <button class="special-btn">Especial</button>
+      </div>
+
+    </section>
+
+  </main>
+<script>
+  let resultado = document.getElementById("resultado")
+  let datos = document.getElementById("datos")
+async function buscarPersonaje() {
+  let llamada = await fetch("https://dragonball-api.com/api/characters")
+  let poner = await llamada.json()
+  console.log(poner)
+  
+  poner.items.forEach((personajes) => {
+    resultado.innerHTML += ` <div class="character-card" onclick="console.log(${personajes.id})" >
+        <img src="${personajes.image} " alt="Goku">
+        <h3>${personajes.name} </h3>
+      </div> `
+      
+    
+  });
+  console.log(poner.items[0].name) 
+  datos.innerHTML+=`<div class="detail-top">
+
+        <img 
+          class="detail-image"
+          src="${poner.items[0] .image} "
+          alt="Goku"
+        >
+
+        <div class="detail-info">
+          <h2>${poner.items[0] .name} </h2>
+          <p><strong>Raza:</strong> ${poner.items[0].race}</p>
+          <p><strong>Género:</strong> ${poner.items[0].gender}</p>
+          <p><strong>Ki:</strong> ${poner.items[0].ki}</p>
+          <p><strong>Afiliación:</strong> ${poner.items[0].affiliation}</p>
+        </div>
+
+      </div>
+
+      <div class="stats">
+
+        <div class="stat">
+          <div class="stat-label">
+            <span>Vida</span>
+            <span>100</span>
+          </div>
+          <div class="bar">
+            <div class="bar-fill" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">
+            <span>Ki</span>
+            <span>90</span>
+          </div>
+          <div class="bar">
+            <div class="bar-fill" style="width: 90%;"></div>
+          </div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-label">
+            <span>Fuerza</span>
+            <span>95</span>
+          </div>
+          <div class="bar">
+            <div class="bar-fill" style="width: 95%;"></div>
+          </div>
+        </div>
+
+      </div>
+`
+};
+buscarPersonaje()
+
+
+</script>
+</body>
+</html>

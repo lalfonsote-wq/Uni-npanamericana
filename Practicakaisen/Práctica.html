@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <div id="resultado"></div>
+<script >
+  async function dinero(){
+    let data= await fetch("Datos.JSON")
+    let money=await data.json()
+    
+    money.forEach((personaje) => {
+  resultado.innerHTML+=`${personaje.usuario} ${personaje.contraseña} ${personaje.trabajo} ${personaje.dinero} ${personaje.habilidades} <img src="${personaje.foto}">`
+  console.log(personaje.usuario);
+  
+});
+    
+  }
+  dinero()
+</script >
+
+</body>
+
+</html>

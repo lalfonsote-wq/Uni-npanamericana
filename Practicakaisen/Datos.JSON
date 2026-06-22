@@ -5,7 +5,9 @@
   "dinero":3800, 
   "habilidades":[
     "inteligencia", "fuerte", "belleza"
-  ]
+    
+  ], 
+  "foto":"https://static.wikia.nocookie.net/doblaje/images/3/3c/HomerSimpson.png"
 },
  {
   "usuario":"luis vargas ", 
@@ -14,6 +16,7 @@
   "dinero":4800, 
   "habilidades":[
     "inteligencia", "fuerte", "belleza"
-   ] 
+   ], 
+     "foto":"https://media.gq.com.mx/photos/5be9eeb284b96e68a794165c/master/pass/11_cosas_que_le_preguntariamos_a_homero_simpson_2494.jpg"
  } 
 ] 

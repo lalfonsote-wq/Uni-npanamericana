@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <div id="resultado"></div>
+  <script>
+  
+  let resultado=document.getElementById("resultado")
+    async function buscarPersonaje(){
+      let llamada= await fetch("https://dragonball-api.com/api/characters")
+      let poner= await llamada.json()
+      console.log(poner)
+      
+      poner.items.forEach((personajes)=>{
+        resultado.innerHTML+=`${personajes.name}`
+        
+      } );
+    };
+    buscarPersonaje()
+  </script>
+</body>
+
+</html>

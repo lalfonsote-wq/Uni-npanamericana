@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script>
+    const pokemons = [
+      { id: 1, nombre: "Bulbasaur", stats: { hp: 45, ataque: 49 } },
+      { id: 2, nombre: "Charmander", stats: { hp: 39, ataque: 52 } },
+      { id: 3, nombre: "Squirtle", stats: { hp: 44, ataque: 48 } }
+    ];
+    
+    function mostrarPokemon(id) {
+      let pokemon = pokemons.find(p => p.id === id);
+      if (pokemon) {
+        console.log("Nombre: " + pokemon.nombre);
+        console.log("HP: " + pokemon.stats.hp);
+        console.log("Ataque: " + pokemon.stats.ataque);
+      } else {
+        console.log("Pokémon no encontrado");
+      }
+    }
+    
+    mostrarPokemon(1);
+    mostrarPokemon(5);
+  </script>
+</body>
+
+</html>
