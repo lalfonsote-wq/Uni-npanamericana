@@ -8,26 +8,34 @@
 </head>
 
 <body>
+  Debes trabajar con JSON y objetos anidados. Utiliza un arreglo de Pokémon con la siguiente
+estructura: { id:1, nombre:"Bulbasaur", stats:{ hp:45, ataque:49 } } Requisitos: 1. Crear
+mostrarPokemon(id). 2. Buscar el Pokémon usando find(). 3. Mostrar nombre. 4. Mostrar hp. 5.
+Mostrar ataque. Prueba: mostrarPokemon(1); Resultado esperado: Nombre: Bulbasaur HP: 45
+Ataque: 49 Reto extra: Mostrar un mensaje si el Pokémon no existe.
   <script>
     const pokemons = [
-      { id: 1, nombre: "Bulbasaur", stats: { hp: 45, ataque: 49 } },
-      { id: 2, nombre: "Charmander", stats: { hp: 39, ataque: 52 } },
-      { id: 3, nombre: "Squirtle", stats: { hp: 44, ataque: 48 } }
-    ];
+      { id: 1,nombre: "Bulbasaur", stats: { hp: 45, ataque: 49 } },
+      { id: 2,nombre: "Charmander", stats: { hp: 39, ataque: 52 } },
+      { id: 3, nombre: "Squirle", stats: { hp: 44, ataque: 48 } }
+      
+    ]
+   
+     
+   
+    function mostrarPokemon(id){
+      const pokemon= pokemons.find(poke=>poke.id==id)
+      if(pokemon){
+        console.log(pokemon.nombre)
+      console.log(pokemon.stats.hp)}else{
+      console.log("inexistente")
+    }} 
+    mostrarPokemon(7)
     
-    function mostrarPokemon(id) {
-      let pokemon = pokemons.find(p => p.id === id);
-      if (pokemon) {
-        console.log("Nombre: " + pokemon.nombre);
-        console.log("HP: " + pokemon.stats.hp);
-        console.log("Ataque: " + pokemon.stats.ataque);
-      } else {
-        console.log("Pokémon no encontrado");
-      }
-    }
     
-    mostrarPokemon(1);
-    mostrarPokemon(5);
+    
+    
+    
   </script>
 </body>
 

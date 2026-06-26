@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <p>
+Debes crear un sistema de inventario. Datos iniciales: let inventario = []; Requisitos: 1. Crear una
+función agregarItem(nombre, valor). 2. Crear una Arrow Function llamada crearItem. 3. crearItem
+debe retornar un objeto. 4. Agregar el objeto al inventario usando push(). 5. Mostrar todo el
+inventario en consola. Pruebas: agregarItem("Espada",500); agregarItem("Escudo",300);
+agregarItem("Poción",50); Objeto esperado: { nombre:"Espada", valor:500 } Reto extra: Agregar
+una propiedad tipo.
+  </p>
+  <script>
+   let inventario = [];
+   function agregarItem(nombre, valor){
+     inventario.push(crearItem(nombre, valor));
+     console.log(inventario)
+    
+     
+   };
+   const crearItem=(nombre, valor)=>{
+     return {nombre: nombre, 
+            valor: valor}
+   };
+   console.log(crearItem("fonso", 42))
+   agregarItem("luis", 62)
+   agregarItem("jorge", 54)
+  </script>
+</body>
+
+</html>

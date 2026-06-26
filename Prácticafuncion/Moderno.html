@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <script>
+const monedas =1000
+const tienda =[
+  { nombre:"Semilla", precio: 100 },
+  { nombre: "Radar", precio: 250 }
+]
+
+const comprar =(nombre) => {
+  const descontarMonedas = (precio) => {
+    monedas= monedas -precio
+  }
+  
+  const producto = tienda.find(produc => produc.nombre === nombre)
+  
+  if (producto) {
+    if (monedas < producto.precio) {
+      console.log("No chele")
+      return
+    }
+    descontarMonedas(1)
+    console.log("compraste"+ producto.nombre)
+    console.log("Monedas" + monedas)
+  }
+}
+
+comprar("Radar")
+comprar("Semilla")
+comprar("Semilla")
+comprar("Semilla")
+comprar("Semilla")
+comprar("Semilla")
+comprar("Semilla")
+comprar("Semilla")
+comprar("Semilla")
+
+  </script>
+</body>
+
+</html>

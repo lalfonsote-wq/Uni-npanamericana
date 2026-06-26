@@ -8,28 +8,49 @@
 </head>
 
 <body>
+  Debes crear un sistema de compras. Datos: let monedas = 1000; const tienda = [ {
+nombre:"Semilla", precio:100 }, { nombre:"Radar", precio:250 } ]; Requisitos: 1. Crear
+comprar(nombre). 2. Buscar el producto usando find(). 3. Crear una función interna llamada
+descontarMonedas(). 4. Restar el precio del producto a monedas. 5. Mostrar las monedas
+restantes. Prueba: comprar("Radar"); Resultado esperado: Compraste Radar Monedas restantes:
+750 Reto extra: Evitar compras si no hay suficientes monedas.
   <script>
     let monedas = 1000;
     const tienda = [
-      { nombre: "Semilla", precio: 100 },
+      { nombre:"Semilla", precio: 100 },
       { nombre: "Radar", precio: 250 }
-    ];
-    
+    ]
     function comprar(nombre) {
-      function descontarMonedas(precio) {
-        monedas -= precio;
+      function descontarMonedas(precio){
+        monedas = monedas - precio
       }
       
-      let producto = tienda.find(p => p.nombre === nombre);
-      
+      let producto = tienda.find(produc => produc.nombre === nombre)
+     
       if (producto) {
-        descontarMonedas(producto.precio);
-        console.log("Compraste " + producto.nombre);
-        console.log("Monedas restantes " + monedas);
+        if (monedas <producto.precio) {
+        console.log("No chele") 
+        return
+        } 
+        descontarMonedas(1);
+        console.log("compraste "+producto.nombre)
+        console.log("Monedas " +monedas)
+        
+        
       }
     }
     
-    comprar("Radar");
+    comprar("Radar")
+    comprar("Semilla")
+    comprar("Semilla")
+    comprar("Semilla")
+    comprar("Semilla")
+    comprar("Semilla")
+    comprar("Semilla")
+    comprar("Semilla")
+    comprar("Semilla")
+    
+//const hola=()=>{}
   </script>
 </body>
 
