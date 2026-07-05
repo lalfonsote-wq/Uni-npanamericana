@@ -1,0 +1,12 @@
+[
+  { "id": 0, "edad": 10, "nombre": "Ana" },
+  { "id": 1, "edad": 20, "nombre": "Carlos" },
+  { "id": 2, "edad": 30, "nombre": "María" },
+  { "id": 3, "edad": 40, "nombre": "Juan" },
+  { "id": 4, "edad": 50, "nombre": "Laura" },
+  { "id": 5, "edad": 60, "nombre": "Pedro" },
+  { "id": 6, "edad": 70, "nombre": "Sofía" },
+  { "id": 7, "edad": 80, "nombre": "Miguel" },
+  { "id": 8, "edad": 90, "nombre": "Elena" },
+  { "id": 9, "edad": 100, "nombre": "Antonio" }
+]

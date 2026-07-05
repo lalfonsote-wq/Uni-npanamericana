@@ -1,5 +1,12 @@
-{
+[{
   "nombre":"gara",
   "tipo":"ninja",
-  "vida":"100"
-}
+  "poder":"100"
+  
+}, 
+{
+  "nombre": "goku",
+  "tipo": "ninjago",
+  "poder": "104"
+  
+}]

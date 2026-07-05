@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Creador de Personajes</title>
+</head>
+<body>
+    <h2>Creador de Personajes</h2>
+    
+    <form id="form">
+        <input id="nombre">
+        <input id="edad">
+        <input id="oficio">
+        <button>Crear</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <script>
+        let resultado = document.getElementById("resultado")
+        let personajes = []
+
+        class Personaje {
+            constructor(nombre, edad, oficio) {
+                this.nombre = nombre
+                this.edad = edad
+                this.oficio = oficio
+                
+            }
+        }
+
+        document.getElementById("form" ).addEventListener("submit", 
+        function(e) {
+            e.preventDefault()
+            
+            let nombre = document.getElementById("nombre").value
+            let edad = document.getElementById("edad").value
+            let oficio = document.getElementById("oficio").value
+            
+            let nuevo = new Personaje(nombre, edad, oficio)
+            personajes.push(nuevo)
+            
+            let html = ""
+            personajes.forEach((z, i) => {
+                html += `Personaje ${i}: ${z.nombre}, ${z.edad} años, ${z.oficio}`
+            })
+            
+            resultado.innerHTML = html
+            
+        })
+    </script>
+</body>
+</html>

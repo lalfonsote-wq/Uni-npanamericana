@@ -9,15 +9,15 @@
 
 <body>
   <script>
-const monedas =1000
-const tienda =[
+    let monedas =1000
+    const tienda =[
   { nombre:"Semilla", precio: 100 },
   { nombre: "Radar", precio: 250 }
 ]
 
-const comprar =(nombre) => {
-  const descontarMonedas = (precio) => {
-    monedas= monedas -precio
+    const comprar =(nombre) => {
+       const descontarMonedas = (precio) => {
+          monedas= monedas -precio
   }
   
   const producto = tienda.find(produc => produc.nombre === nombre)
@@ -27,7 +27,7 @@ const comprar =(nombre) => {
       console.log("No chele")
       return
     }
-    descontarMonedas(1)
+    descontarMonedas(producto.precio)
     console.log("compraste"+ producto.nombre)
     console.log("Monedas" + monedas)
   }

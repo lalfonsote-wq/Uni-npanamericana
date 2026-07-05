@@ -26,8 +26,17 @@
       let respuesta= await fetch ("personajes.JSON");
       let datos= await respuesta.json();
       console.log(datos);
+      const encontrar=(x)=>{
+      const nuevo=datos.find(p=>p.poder==x)
+      console.log(nuevo.nombre)
     };
-    cargarArchivoJSON()
+    encontrar(104);
+    };
+    cargarArchivoJSON();
+    
+    
+    
+    
     
       </script >
 </body>

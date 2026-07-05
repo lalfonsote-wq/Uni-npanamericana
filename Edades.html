@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+    body{
+      background:black;
+      color:white;
+      
+    }
+   .busqueda{
+     color:yellow;
+   }
+   #resultado{
+     color:white;
+     padding:10px;
+     border:1px solid #858798;
+     margin:5px;
+   }
+  </style>
+</head>
+
+<body>
+  <h1 class="busqueda">
+    buscador de persona
+  </h1>
+  <div id="resultado" >
+    <!--Tab to edit-->
+  </div>
+<input id="buscar">
+    
+</input>
+
+<script>
+  let resultado=document.getElementById("resultado");
+  let input=document.getElementById ("buscar");
+  let datosGlobales=[];
+  async function cargarArchivoJSON(){
+      let respuesta= await fetch ("edad.json");
+       datosGlobales= await respuesta.json();
+    
+       
+   console.log(datosGlobales[4] )
+   
+   
+} 
+function buscarPersona(id){
+  for(let i=0; i<datosGlobales.length; i++){
+    if(datosGlobales[i].id==id){
+      return datosGlobales[i]
+    };
+  };
+  return null;
+};
+input.addEventListener(
+  "input", function(){
+    let numero= parseInt(this.value)
+  if(isNaN(numero)){resultado.innerHTML= "escribe un numero"; return}
+  if(numero>=0 && numero<=9){
+    let persona=buscarPersona(numero)
+    if(persona){
+      resultado.innerHTML= "nombre "+ persona.nombre + " edad " +  persona.edad + " años " }
+      else{
+    resultado.innerHTML= "no se encontró"
+  }}else{
+    resultado.innerHTML= "escribe un número del 0 al 9"}
+  
+});
+      cargarArchivoJSON()
+      
+  console.log(datosGlobales)
+  
+</script>
+</body>
+
+</html>
