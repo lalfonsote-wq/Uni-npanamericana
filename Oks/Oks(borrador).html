@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <div id="visuales"></div>
+  
+  <script>
+    let visuales = document.getElementById("visuales")
+    
+    async function cargarArchivoJSON() {
+      let respuesta = await fetch("Oks.json")
+      let datos = await respuesta.json()
+      console.log(datos)
+      
+      
+      
+      datos.forEach((jugador) => {
+        visuales.innerHTML += `
+          
+            ${jugador.name}
+            ${jugador.number} 
+            ${jugador.position} 
+            ${jugador.team}
+            <img src="${jugador.image}">
+          
+        `
+      })
+    }
+    
+    cargarArchivoJSON()
+  </script>
+  
+</body>
+
+</html>

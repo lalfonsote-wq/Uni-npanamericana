@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "name": "Shai Gilgeous-Alexander",
+    "number": 2,
+    "position": "PG",
+    "team": "OKC",
+    "personId": 1628983,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628983.png"
+  },
+  {
+    "id": 2,
+    "name": "Chet Holmgren",
+    "number": 7,
+    "position": "C",
+    "team": "OKC",
+    "personId": 1631096,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631096.png"
+  },
+  {
+    "id": 3,
+    "name": "Jalen Williams",
+    "number": 8,
+    "position": "SF",
+    "team": "OKC",
+    "personId": 1631114,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631114.png"
+  },
+  {
+    "id": 4,
+    "name": "Luguentz Dort",
+    "number": 5,
+    "position": "SG",
+    "team": "OKC",
+    "personId": 1629652,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629652.png"
+  },
+  {
+    "id": 5,
+    "name": "Alex Caruso",
+    "number": 9,
+    "position": "SG",
+    "team": "OKC",
+    "personId": 2991350,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/2991350.png"
+  },
+  {
+    "id": 6,
+    "name": "Isaiah Hartenstein",
+    "number": 55,
+    "position": "C",
+    "team": "OKC",
+    "personId": 1628392,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1628392.png"
+  },
+  {
+    "id": 7,
+    "name": "Cason Wallace",
+    "number": 22,
+    "position": "PG",
+    "team": "OKC",
+    "personId": 1641706,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641706.png"
+  },
+  {
+    "id": 8,
+    "name": "Ajay Mitchell",
+    "number": 25,
+    "position": "PG",
+    "team": "OKC",
+    "personId": 1642346,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1642346.png"
+  },
+  {
+    "id": 9,
+    "name": "Nikola Topic",
+    "number": 44,
+    "position": "PG",
+    "team": "OKC",
+    "personId": 1641794,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1641794.png"
+  },
+  {
+    "id": 10,
+    "name": "Jaylin Williams",
+    "number": 6,
+    "position": "PF",
+    "team": "OKC",
+    "personId": 1631119,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1631119.png"
+  },
+  {
+    "id": 11,
+    "name": "Aaron Wiggins",
+    "number": 21,
+    "position": "SF",
+    "team": "OKC",
+    "personId": 1630598,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1630598.png"
+  },
+  {
+    "id": 12,
+    "name": "Isaiah Joe",
+    "number": 11,
+    "position": "SG",
+    "team": "OKC",
+    "personId": 1629678,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629678.png"
+  },
+  {
+    "id": 13,
+    "name": "Kenrich Williams",
+    "number": 34,
+    "position": "SF",
+    "team": "OKC",
+    "personId": 1629026,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1629026.png"
+  },
+  {
+    "id": 14,
+    "name": "Thomas Sorber",
+    "number": 12,
+    "position": "C",
+    "team": "OKC",
+    "personId": 1650001,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1650001.png"
+  },
+  {
+    "id": 15,
+    "name": "Brooks Barnhizer",
+    "number": 23,
+    "position": "SF",
+    "team": "OKC",
+    "personId": 1650002,
+    "image": "https://cdn.nba.com/headshots/nba/latest/1040x760/1650002.png"
+  }
+]

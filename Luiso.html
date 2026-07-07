@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Creador de Personajes</title>
+    <title></title>
 </head>
 <body>
     <h2>Creador de Personajes</h2>
     
     <form id="form">
         <input id="nombre">
-        <input id="edad">
+        <input id="edad" type="number">
         <input id="oficio">
         <button>Crear</button>
     </form>
@@ -43,7 +43,7 @@
             
             let html = ""
             personajes.forEach((z, i) => {
-                html += `Personaje ${i}: ${z.nombre}, ${z.edad} años, ${z.oficio}`
+                html += `Personaje ${i+1}: ${z.nombre}, ${z.edad} años, ${z.oficio}`
             })
             
             resultado.innerHTML = html
