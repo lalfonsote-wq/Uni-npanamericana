@@ -1,0 +1,675 @@
+ <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Permite que el diseño se adapte correctamente a celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema de Estudiantes</title>
+
+    <style>
+        /* =========================================
+           CONFIGURACIÓN GENERAL
+        ========================================= */
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f6fb;
+            color: #1f2937;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        /* =========================================
+           ENCABEZADO
+        ========================================= */
+
+        .encabezado {
+            background: linear-gradient(135deg, #1d4ed8, #4338ca);
+            color: white;
+            padding: 35px 20px;
+        }
+
+        .encabezado-contenido {
+            width: min(1200px, 100%);
+            margin: auto;
+        }
+
+        .encabezado h1 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            margin-bottom: 10px;
+        }
+
+        .encabezado p {
+            max-width: 700px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* =========================================
+           CONTENEDOR PRINCIPAL
+        ========================================= */
+
+        .contenedor {
+            width: min(1200px, calc(100% - 30px));
+            margin: 30px auto;
+        }
+
+        /* =========================================
+           TARJETAS DE RESUMEN
+        ========================================= */
+
+        .resumen {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .resumen-tarjeta {
+            background: white;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+            border-left: 6px solid #2563eb;
+        }
+
+        .resumen-tarjeta:nth-child(2) {
+            border-left-color: #16a34a;
+        }
+
+        .resumen-tarjeta:nth-child(3) {
+            border-left-color: #dc2626;
+        }
+
+        .resumen-tarjeta:nth-child(4) {
+            border-left-color: #9333ea;
+        }
+
+        .resumen-tarjeta span {
+            display: block;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .resumen-tarjeta strong {
+            font-size: 2rem;
+        }
+
+        /* =========================================
+           DISTRIBUCIÓN DEL FORMULARIO Y LISTA
+        ========================================= */
+
+        .panel-principal {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        .panel {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.08);
+        }
+
+        .panel h2 {
+            margin-bottom: 8px;
+            color: #111827;
+        }
+
+        .descripcion-panel {
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 24px;
+        }
+
+        /* =========================================
+           FORMULARIO
+        ========================================= */
+
+        .grupo-formulario {
+            margin-bottom: 18px;
+        }
+
+        .grupo-formulario label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 0.92rem;
+        }
+
+        .grupo-formulario input,
+        .grupo-formulario select {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            outline: none;
+            background: white;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .grupo-formulario input:focus,
+        .grupo-formulario select:focus {
+            border-color: #2563eb;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        .boton-registrar {
+            width: 100%;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 13px;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .boton-registrar:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        .mensaje {
+            display: none;
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .mensaje-error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .mensaje-exito {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* =========================================
+           FILTROS
+        ========================================= */
+
+        .barra-superior {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 22px;
+        }
+
+        .filtros {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filtros select {
+            padding: 10px 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            background: white;
+            outline: none;
+        }
+
+        /* =========================================
+           CONTENEDOR DE ESTUDIANTES
+        ========================================= */
+
+        .lista-estudiantes {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        /* Estas clases serán utilizadas por las
+           tarjetas creadas desde JavaScript */
+
+        .tarjeta-estudiante {
+            border: 1px solid #e2e8f0;
+            border-radius: 15px;
+            padding: 18px;
+            background: #ffffff;
+            position: relative;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .tarjeta-estudiante:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+        }
+
+        .estudiante-cabecera {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .estudiante-cabecera h3 {
+            margin-bottom: 5px;
+        }
+
+        .estudiante-cabecera p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: #dbeafe;
+            color: #1d4ed8;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .datos-estudiante {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .dato {
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 9px;
+        }
+
+        .dato span {
+            display: block;
+            color: #64748b;
+            font-size: 0.78rem;
+            margin-bottom: 4px;
+        }
+
+        .dato strong {
+            font-size: 0.95rem;
+        }
+
+        /* =========================================
+           ESTADOS CREADOS CON IF / ELSE
+        ========================================= */
+
+        .estado {
+            display: inline-block;
+            padding: 7px 11px;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: bold;
+        }
+
+        .aprobado {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .reprobado {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .excelente {
+            background: #ede9fe;
+            color: #6b21a8;
+        }
+
+        .bueno {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .regular {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .insuficiente {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        /* =========================================
+           BOTÓN ELIMINAR
+        ========================================= */
+
+        .boton-eliminar {
+            width: 100%;
+            border: none;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 9px;
+            border-radius: 9px;
+            margin-top: 14px;
+            font-weight: bold;
+        }
+
+        .boton-eliminar:hover {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        /* =========================================
+           ESTADO VACÍO
+        ========================================= */
+
+        .estado-vacio {
+            grid-column: 1 / -1;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 2px dashed #cbd5e1;
+            border-radius: 15px;
+            color: #64748b;
+            padding: 30px;
+        }
+
+        .estado-vacio .icono {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .estado-vacio h3 {
+            color: #334155;
+            margin-bottom: 8px;
+        }
+
+        /* =========================================
+           PIE DE PÁGINA
+        ========================================= */
+
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================
+           DISEÑO RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 950px) {
+            .resumen {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .panel-principal {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .contenedor {
+                width: min(100% - 20px, 1200px);
+                margin-top: 20px;
+            }
+
+            .resumen {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .resumen-tarjeta {
+                padding: 16px;
+            }
+
+            .resumen-tarjeta strong {
+                font-size: 1.5rem;
+            }
+
+            .panel {
+                padding: 18px;
+            }
+
+            .barra-superior {
+                align-items: stretch;
+                flex-direction: column;
+            }
+
+            .filtros {
+                flex-direction: column;
+            }
+
+            .lista-estudiantes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================================
+         ENCABEZADO PRINCIPAL
+    ========================================== -->
+
+    <header class="encabezado">
+        <div class="encabezado-contenido">
+            <h1>🎓 Sistema de Estudiantes</h1>
+
+            <p>
+                Registra estudiantes, analiza sus calificaciones y muestra
+                automáticamente si aprobaron o reprobaron.
+            </p>
+        </div>
+    </header>
+
+    <main class="contenedor">
+
+        <!-- =========================================
+             RESUMEN GENERAL
+
+             JavaScript deberá modificar estos valores.
+        ========================================== -->
+
+        <section class="resumen">
+
+            <article class="resumen-tarjeta">
+                <span>Total de estudiantes</span>
+                <strong id="totalEstudiantes">0</strong>
+            </article>
+
+            <article class="resumen-tarjeta">
+                <span>Estudiantes aprobados</span>
+                <strong id="totalAprobados">0</strong>
+            </article>
+
+            <article class="resumen-tarjeta">
+                <span>Estudiantes reprobados</span>
+                <strong id="totalReprobados">0</strong>
+            </article>
+
+            <article class="resumen-tarjeta">
+                <span>Promedio del grupo</span>
+                <strong id="promedioGrupo">0</strong>
+            </article>
+
+        </section>
+
+        <section class="panel-principal">
+
+            <!-- =====================================
+                 FORMULARIO DE REGISTRO
+            ====================================== -->
+
+            <aside class="panel">
+
+                <h2>Registrar estudiante</h2>
+
+                <p class="descripcion-panel">
+                    Completa todos los campos para agregar un estudiante.
+                </p>
+
+                <form id="formularioEstudiante">
+
+                    <div class="grupo-formulario">
+                        <label for="nombre">Nombre completo</label>
+
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Ejemplo: María Pérez"
+                        >
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label for="edad">Edad</label>
+
+                        <input
+                            type="number"
+                            id="edad"
+                            placeholder="Ejemplo: 16"
+                            min="5"
+                            max="100"
+                        >
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label for="curso">Curso</label>
+
+                        <select id="curso">
+                            <option value="">Selecciona un curso</option>
+                            <option value="Programación">Programación</option>
+                            <option value="Diseño">Diseño</option>
+                            <option value="Matemáticas">Matemáticas</option>
+                            <option value="Inglés">Inglés</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label for="calificacion">Calificación</label>
+
+                        <input
+                            type="number"
+                            id="calificacion"
+                            placeholder="Calificación de 0 a 100"
+                            min="0"
+                            max="100"
+                        >
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="boton-registrar"
+                    >
+                        Registrar estudiante
+                    </button>
+
+                </form>
+
+                <!-- JavaScript puede mostrar aquí mensajes
+                     de error o confirmación -->
+
+                <div id="mensaje" class="mensaje"></div>
+
+            </aside>
+
+            <!-- =====================================
+                 PANEL DE ESTUDIANTES
+            ====================================== -->
+
+            <section class="panel">
+
+                <div class="barra-superior">
+
+                    <div>
+                        <h2>Lista de estudiantes</h2>
+
+                        <p class="descripcion-panel">
+                            Consulta los estudiantes registrados.
+                        </p>
+                    </div>
+
+                    <div class="filtros">
+
+                        <select id="filtroEstado">
+                            <option value="todos">Todos los estados</option>
+                            <option value="aprobado">Aprobados</option>
+                            <option value="reprobado">Reprobados</option>
+                        </select>
+
+                        <select id="filtroCurso">
+                            <option value="todos">Todos los cursos</option>
+                            <option value="Programación">Programación</option>
+                            <option value="Diseño">Diseño</option>
+                            <option value="Matemáticas">Matemáticas</option>
+                            <option value="Inglés">Inglés</option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+                <!-- JavaScript deberá insertar aquí
+                     las tarjetas de los estudiantes -->
+
+                <div id="listaEstudiantes" class="lista-estudiantes">
+
+                    <!-- Este contenido deberá desaparecer cuando
+                         se registre el primer estudiante -->
+
+
+                    <div class="estado-vacio">
+                        <div class="icono">📚</div>
+
+                        <h3>No hay estudiantes registrados</h3>
+
+                        <p>
+                            Utiliza el formulario para registrar al primer
+                            estudiante.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <footer>
+        Práctica de JavaScript: constructores, ciclos y condiciones.
+    </footer>
+
+    <!-- Archivo donde el estudiante programará la lógica -->
+    <script src="script.js"></script>
+
+</body>
+</html>
