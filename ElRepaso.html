@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <form id="formulario">
+     <input type="text" id="nombre" placeholder="poner nombre">
+    
+  </input>
+  <button type="submit">enviar</button>
+  </form>
+  <div id="resultado">
+    
+  </div>
+ 
+  <script>
+    let formulario=document.getElementById("formulario")
+    const resultado=document.getElementById("resultado")
+    let items=[]
+    formulario.addEventListener(
+      "submit", function(e){
+        e.preventDefault()
+        const objeto={
+          nombre: document.getElementById("nombre").value
+          
+        }
+        items.push(objeto)
+        console.log(items)
+        mostrarObjetos()
+      }
+      
+    )
+    function mostrarObjetos(){
+      resultado.innerHTML=""
+      
+      for(let item of items){
+      resultado.innerHTML+=`nombre:<br> ${item.nombre} </br>`
+      
+    }
+    }
+    
+    
+  </script>
+</body>
+
+</html>

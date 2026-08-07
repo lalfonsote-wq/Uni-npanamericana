@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Registro del torneo</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #eeeeee;
+        }
+
+        .contenedor {
+            max-width: 800px;
+            margin: auto;
+            padding: 25px;
+            background-color: white;
+            border-radius: 12px;
+        }
+
+        h1,
+        h2 {
+            text-align: center;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+        }
+
+        .checkbox-linea {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .checkbox-linea label {
+            margin: 0;
+        }
+
+        .botones {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        button {
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        #btnRegistrar {
+            background-color: #222222;
+            color: white;
+        }
+
+        #btnCancelar {
+            background-color: #cccccc;
+        }
+
+        #mensaje,
+        #estadisticas,
+        #listaParticipantes {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f5f5f5;
+        }
+
+        .aprobado {
+            border-left: 6px solid green;
+        }
+
+        .rechazado {
+            border-left: 6px solid red;
+        }
+
+        .condicional {
+            border-left: 6px solid orange;
+        }
+
+        .participante {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #cccccc;
+        }
+
+        @media (max-width: 600px) {
+            .botones {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="contenedor">
+
+        <h1>Torneo de videojuegos</h1>
+
+        <div class="campo">
+            <label for="nombre">Nombre completo</label>
+
+            <input
+                type="text"
+                id="nombre"
+                placeholder="Ejemplo: Miguel Vargas"
+            >
+        </div>
+
+        <div class="campo">
+            <label for="edad">Edad</label>
+
+            <input
+                type="number"
+                id="edad"
+                placeholder="Ejemplo: 18"
+            >
+        </div>
+
+        <div class="campo">
+            <label for="usuario">Nombre de usuario</label>
+
+            <input
+                type="text"
+                id="usuario"
+                placeholder="Ejemplo: jugador2026"
+            >
+        </div>
+
+        <div class="campo">
+            <label for="nivel">Nivel de experiencia</label>
+
+            <select id="nivel">
+                <option value="">Selecciona un nivel</option>
+                <option value="principiante">Principiante</option>
+                <option value="intermedio">Intermedio</option>
+                <option value="avanzado">Avanzado</option>
+            </select>
+        </div>
+
+        <div class="campo checkbox-linea">
+            <input type="checkbox" id="membresia">
+
+            <label for="membresia">
+                Tiene membresía
+            </label>
+        </div>
+
+        <div class="campo">
+            <label for="codigo">Código de invitación</label>
+
+            <input
+                type="text"
+                id="codigo"
+                placeholder="Código opcional"
+            >
+        </div>
+
+        <div class="botones">
+            <button id="btnRegistrar">
+                Registrar participante
+            </button>
+
+            <button id="btnCancelar">
+                Cancelar último registro
+            </button>
+        </div>
+
+        <section id="mensaje">
+            Completa el formulario.
+        </section>
+
+        <section id="estadisticas"></section>
+
+        <section>
+            <h2>Participantes registrados</h2>
+
+            <div id="listaParticipantes">
+                Todavía no hay participantes.
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Variables generales
+
+        let cuposDisponibles = 2;
+        let participantesAprobados = 0;
+
+        let participantes = [];
+
+        // Elementos del HTML
+
+        const nombreInput =
+            document.getElementById("nombre");
+
+        const edadInput =
+            document.getElementById("edad");
+            //me rendí con la variable con s y le puse s pa salí de ese problema q llevaba como 10 mins en eso
+        const usuarioInputs =
+            document.getElementById("usuario");
+
+        const nivelSelects =
+            document.getElementById("nivel");
+
+        const membresiaCheckbox =
+            document.getElementById("membresia");
+
+        const codigoInputs =
+            document.getElementById("codigo");
+
+        const btnRegistrar =
+            document.getElementById("btnRegistrar");
+
+        const btnCancelar =
+            document.getElementById("btnCancelar");
+
+        const mensajeElemento =
+            document.getElementById("mensaje");
+
+        const estadisticasElemento =
+            document.getElementById("estadisticas");
+
+        const listaElemento =
+            document.getElementById("listaParticipantes");
+
+        // Mostrar las estadísticas iniciales
+
+        actualizarEstadisticas();
+
+        // Evento para registrar
+
+        btnRegistrar.addEventListener(
+            "click",
+            registrarParticipante
+        );
+
+        // Evento para cancelar
+
+        btnCancelar.addEventListener(
+            "click",
+            cancelarUltimoRegistro
+        );
+
+        function registrarParticipante() {
+
+            // PASO 1:
+            // Obtener y limpiar los datos.
+                //aquí cambiamos nombreimput y edadinput pues esta mal pq ya esta declarao
+            const nombre = nombreInput.value.trim();
+const edad = Number(edadInput.value);
+const usuario = usuarioInputs.value.trim().toLowerCase();
+const nivel = nivelSelects.value;
+//borre membresía checkbox
+const codigo = codigoInputs.value.trim().toUpperCase();
+
+
+        //una tilde rebelde aqui
+         tieneMembresia = membresiaCheckbox.checked;
+
+        //varía línea borrada, como usuario input
+            // PASO 2:
+            // Crear variables booleanas.
+//sin errores pero pusimos los códigos de invitación como es
+            const nombreValido = nombre.length >= 3;
+
+const tieneEspacios = usuario.indexOf(" ") !== -1;
+const contieneAdmin = usuario.indexOf("admin") !== -1;
+const contieneModerador = usuario.indexOf("moderador") !== -1;
+
+const usuarioValido =
+    !tieneEspacios &&
+    !contieneAdmin &&
+    !contieneModerador &&
+    usuario.length > 0;
+
+const codigoValido =
+    codigo === "GAME2026" ||
+    codigo === "VIP2026" ||
+    codigo === "STUDENT";
+
+            // PASO 3:
+            // Crear una variable para saber
+            // si el participante está aprobado.
+
+            let aprobado = false;
+
+            let estado = "";
+
+            let mensaje = "";
+
+            // PASO 4:
+            // Validar si quedan cupos.
+//no error
+            if (cuposDisponibles <= 0) {
+    estado = "rechazado";
+    mensaje = "No quedan cupos disponibles.";
+
+            }
+
+            // PASO 5:
+            // Validar el nombre.
+//no error
+            else if (!nombreValido) {
+    estado = "rechazado";
+    mensaje = "El nombre debe tener al menos 3 caracteres.";
+}
+            
+
+            // PASO 6:
+            // Validar la edad.
+
+            else if (edad <= 0 || edad > 130 || isNaN(edad)) {
+    estado = "rechazado";
+    mensaje = "Debes ingresar una edad válida.";
+}
+
+            // PASO 7:
+            // Validar el nombre de usuario.
+
+            else if (!usuarioValido) {
+    estado = "rechazado";
+    mensaje = "El nombre de usuario no puede estar vacío, tener espacios, ni contener admin o moderador.";
+}
+
+            // PASO 8:
+            // Validar el nivel.
+
+            else if (!nivel) {
+    estado = "rechazado";
+    mensaje = "Debes seleccionar un nivel.";
+}
+
+            // PASO 9:
+            // Menores de 13 años.
+        //eto estaba al revés, decía menor q 13 y eso jodia todos
+            else if (edad < 13) {
+    estado = "rechazado";
+    mensaje = "Debes tener al menos 13 años.";
+}
+
+            // PASO 10:
+            // Participantes entre 13 y 15 años.
+//no taba mal pero faltaban un par de condiciones 
+            else if (edad >= 13 && edad <= 15 && !tieneMembresia) {
+    estado = "rechazado";
+    mensaje = "Los participantes de 13 a 15 años necesitan membresía.";
+}
+else if (edad >= 13 && edad <= 15 && tieneMembresia) {
+    aprobado = true;
+    estado = "condicional";
+    mensaje = "Participante aprobado con condiciones por ser menor de edad y tener membresía.";
+}
+
+            // PASO 11:
+            // Participantes entre 16 y 17 años.
+//quitamos el requisito de los 18 
+            else if (edad>=16 && edad <= 17 &&!tieneMembresia) {
+
+                estado = "rechazado";
+
+                mensaje =
+                    "Los participantes de 16 y 17 años necesitan membresía o un código válido.";
+
+            }
+            else if (edad>= 70){
+              aprobado=true
+              estado="aprobado" 
+              mensaje="privilegio otorgao"
+            }
+            else if (edad >= 18) {
+    aprobado = true;
+    estado = "aprobado";
+    mensaje = "Participante registrado correctamente.";
+}
+
+            // PASO 12:
+            // Si supera todas las validaciones.
+
+            else {
+
+                aprobado = true;
+
+                estado = "aprobado";
+
+                mensaje =
+                    "Participante registrado correctamente.";
+
+            }
+
+            // PASO 13:
+            // Si fue aprobado, actualizar los contadores.
+
+            if (aprobado === true) { participantesAprobados++
+            cuposDisponibles--
+
+                // Incrementar participantes aprobados.
+
+                // Disminuir cupos disponibles.
+
+                const participante = {
+                    nombre: nombre,
+                    edad: edad,
+                    usuario: usuario,
+                    nivel: nivel,
+                    tieneMembresia: tieneMembresia,
+                    codigoValido: codigoValido
+                };
+
+                participantes.push(participante);
+
+                mostrarParticipantes();
+
+                limpiarFormulario();
+            }
+
+            // PASO 14:
+            // Mostrar el resultado con innerHTML.
+
+            const textoMembresia =
+                tieneMembresia
+                    ? "Membresía activa"
+                    : "Sin membresía";
+
+            mensajeElemento.className = estado;
+
+            mensajeElemento.innerHTML = `
+                <h3>${mensaje}</h3>
+
+                <p>
+                    <strong>Nombre:</strong>
+                    ${nombre || "No disponible"}
+                </p>
+
+                <p>
+                    <strong>Membresía:</strong>
+                    ${textoMembresia}
+                </p>
+            `;
+
+            actualizarEstadisticas();
+        }
+
+        function mostrarParticipantes() {
+
+            if (participantes.length === 0) {
+
+                listaElemento.innerHTML =
+                    "Todavía no hay participantes.";
+
+                return;
+            }
+
+            listaElemento.innerHTML = "";
+
+            for (
+                let indice = 0;
+                indice < participantes.length;
+                indice++
+            ) {
+
+                const participante =
+                    participantes[indice];
+
+                const membresiaTexto =
+                    participante.tieneMembresia
+                        ? "Sí"
+                        : "No";
+
+                listaElemento.innerHTML += `
+                    <div class="participante">
+                        <strong>
+                            ${indice + 1}.
+                            ${participante.nombre}
+                        </strong>
+
+                        <p>
+                            Usuario:
+                            ${participante.usuario}
+                        </p>
+
+                        <p>
+                            Edad:
+                            ${participante.edad}
+                        </p>
+
+                        <p>
+                            Nivel:
+                            ${participante.nivel}
+                        </p>
+
+                        <p>
+                            Membresía:
+                            ${membresiaTexto}
+                        </p>
+                    </div>
+                `;
+            }
+        }
+
+        function actualizarEstadisticas() {
+
+            const disponibilidad =
+                cuposDisponibles > 0
+                    ? "Registro abierto"
+                    : "Registro cerrado";
+
+            estadisticasElemento.innerHTML = `
+                <h3>Estadísticas</h3>
+
+                <p>
+                    Participantes aprobados:
+                    <strong>
+                        ${participantesAprobados}
+                    </strong>
+                </p>
+
+                <p>
+                    Cupos disponibles:
+                    <strong>
+                        ${cuposDisponibles}
+                    </strong>
+                </p>
+
+                <p>
+                    Estado:
+                    <strong>
+                        ${disponibilidad}
+                    </strong>
+                </p>
+            `;
+        }
+
+        function cancelarUltimoRegistro() {
+
+            // Evitar eliminar si la lista está vacía.
+
+            if (participantes.length === 0) {
+
+                mensajeElemento.className =
+                    "rechazado";
+
+                mensajeElemento.innerHTML = `
+                    <h3>
+                        No hay registros para cancelar.
+                    </h3>
+                `;
+
+                return;
+            }
+
+            const participanteEliminado =
+                participantes.pop();
+
+            // Disminuir el contador de aprobados.
+
+            // Recuperar un cupo.
+
+            mostrarParticipantes();
+
+            actualizarEstadisticas();
+
+            mensajeElemento.className =
+                "condicional";
+
+            mensajeElemento.innerHTML = `
+                <h3>Registro cancelado</h3>
+
+                <p>
+                    Se eliminó a:
+                    <strong>
+                        ${participanteEliminado.nombre}
+                    </strong>
+                </p>
+            `;
+        }
+
+        function limpiarFormulario() {
+
+            nombreInput.value = "";
+            edadInput.value = "";
+            usuarioInputs.value = "";
+            nivelSelects.value = "";
+            membresiaCheckbox.checked = false;
+            codigoInputs.value = "";
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Asistencia</title>
+</head>
+<body>
+    <h1>Control de Asistencia</h1>
+    
+    <form id="formAsistencia">
+        <div>
+            <label>
+                <input type="checkbox" id="est1" checked>
+                García
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="est2" checked>
+                Carlos 
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="est3" checked>
+                 López
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="est4" checked>
+                Juan 
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="est5" checked>
+                Laura 
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="est6" checked>
+                Pedro 
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="est7" checked>
+                Sofía 
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="est8" checked>
+                Diego 
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="est9" checked>
+                Valentina 
+            </label>
+        </div>
+        <div>
+            <label>
+                <input type="checkbox" id="est10" checked>
+                Andrés
+            </label>
+        </div>
+        <br>
+        <button type="button" onclick="enviar()">Enviar</button>
+    </form>
+
+    <div id="resultados"></div>
+
+    <script>
+    //array bacanisimo para cada estudiante, el id es pa q el checbox lo reconozca
+        const estudiantes = [
+            { id: 'est1', nombre: 'Ana García' },
+            { id: 'est2', nombre: 'Carlos Pérez' },
+            { id: 'est3', nombre: 'María López' },
+            { id: 'est4', nombre: 'Juan Martínez' },
+            { id: 'est5', nombre: 'Laura Fernández' },
+            { id: 'est6', nombre: 'Pedro Sánchez' },
+            { id: 'est7', nombre: 'Sofía Ramírez' },
+            { id: 'est8', nombre: 'Diego Torres' },
+            { id: 'est9', nombre: 'Valentina Gómez' },
+            { id: 'est10', nombre: 'Andrés Ruiz' }
+        ]
+//función llamada enviar, se ejecuta cuando le damos click al botón enviar 
+        function enviar() {
+          //variables, ausente es un array vacío para guardar lo nombre de lo ausente 
+            let ausentes = []
+            //presente empieza de 0 y se va contando con el número de presente q haya
+            let presentes = 0
+//un bucle ahí, i=0:empieza en el primer estudiante
+//i<estudiantes.length: si índice es menor q 10 (cantidad de estudiantes) se repetira
+// índice va sumando 1 a si mismo
+            for (let i = 0; i < estudiantes.length; i++) {
+              //busca en el html el id q corresponde a estudiante
+                let checkbox = document.getElementById(estudiantes[i].id)
+                //si checkbox chequea se sumará uno, si no chequea se pondrá en ausente su nombre
+                if (checkbox.checked) {
+                    presentes++
+                } else {
+                    ausentes.push(estudiantes[i].nombre)
+                }
+            }
+//formula de porcentaje, solo eso
+            let porcentaje = (presentes / estudiantes.length) * 100
+//declaramos una variable para poder visualizar todos, no necesariamente debe llamarse html
+            let html = '<hr>'
+            html += '<h2>Resultados</h2>'
+            //si el tamaño de ausentes es mayor a 0 saldrá esto
+            if (ausentes.length > 0) {
+                html += 'Ausentes'
+                //esto es lo mismo q el for e if de los presentes
+                for (let i = 0; i < ausentes.length; i++) {
+                    html += '<li>' + ausentes[i] + '</li>'
+                }
+              //si no, saldra esto 
+            } else {
+                html += 'Todos presentes'
+            }
+            //por cierto, después de agregar html pongo += para q se agregue a lo anterior 
+            //El.fixed redondea a 1 decimal ejemplo si da 80,saldra 80.0 es bueno si tenemos un número de estudiantes impar
+            html += 'Porcentaje presentes:' + porcentaje.toFixed(1) + '%'
+//esto manda toda la variable html a nuestro div en el html, por eso no declaramos antes, ps ya habíamos declarado
+            document.getElementById('resultados').innerHTML = html
+        }
+    </script>
+</body>
+</html>

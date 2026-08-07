@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+  <input id="alto" type="number">
+  
+  </input>
+    <input id="ancho" type="number">
+  
+  </input> 
+  <button type="submit" onclick="cubos()">
+    evaluar
+  </button>
+  <script>
+      function cubos(){
+      
+      let ancho=document.getElementById ("ancho").value 
+  let alto=document.getElementById("alto").value
+  
+
+      if(alto===ancho){
+        console.log("un cuadrao");
+        
+      }else{
+          console.log("otra figura" )
+        };
+    
+      
+    }
+    console.log(ancho)
+  </script>
+</body>
+
+</html>

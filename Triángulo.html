@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+
+<body>
+    <input id="cara1" type="number">
+  
+  </input>
+    <input id="cara2" type="number">
+  
+  </input>
+  <input id="cara3" type="number">
+    
+  </input>
+  <button type="submit" onclick="triangulo()">
+    evaluar
+  </button>
+  <script>
+    function triangulo(){
+      let cara1=document.getElementById("cara1").value
+      let cara2=document.getElementById("cara2").value
+      let cara3=document.getElementById("cara3").value
+      if(cara1==cara2 && cara2==cara3){
+        console.log("esto es un equilatero")
+      }
+      else if(cara1==cara2 || cara1==cara3 || cara2==cara3){
+        console.log("esto es isoceles")
+      }else{
+        console.log("escaleno") 
+      }
+    }
+    console.log(cara1)
+    const calculatedArea= (ancho, alto)=>{
+        ancho*alto}
+       console.log(calculatedArea(5,3))
+  </script>
+</body>
+
+</html>
